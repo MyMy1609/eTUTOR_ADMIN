@@ -7,10 +7,10 @@
         Tip 2: you can also add an image using data-image tag
     -->
     <div class="logo">
-        <a href="http://www.creative-tim.com/" class="simple-text logo-mini">
+        <a href="@Url.Action("Dashboard","Home")" class="simple-text logo-mini">
                   
         </a>
-        <a href="http://www.creative-tim.com/" class="simple-text logo-normal">
+        <a href="@Url.Action("Dashboard","Home")" class="simple-text logo-normal">
             eTuTor
         </a>
     </div>
@@ -52,25 +52,25 @@
         </div>
         <ul class="nav">
             <li class="nav-item">
-                <a class="nav-link" href="dashboard.html">
+                <a class="nav-link" href="@Url.Action("Dashboard","Home")">
                     <i class="material-icons">equalizer</i>
                     <p> Dashboard </p>
                 </a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="#pagesExamples">
+                <a class="nav-link" href="@Url.Action("user","Home")">
                     <i class="material-icons">group</i>
                     <p> Quản Lý Người Dùng</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#pagesExamples">
+                <a class="nav-link" href="@Url.Action("course","Home")">
                     <i class="material-icons">import_contacts</i>
                     <p> Quản Lý Buổi Học</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#pagesExamples">
+                <a class="nav-link" href="@Url.Action("datail","Home")">
                     <i class="material-icons">chat</i>
                     <p> Quản lý Liên Hệ</p>
                 </a>

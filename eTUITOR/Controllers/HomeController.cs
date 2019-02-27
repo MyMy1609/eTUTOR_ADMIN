@@ -3,17 +3,38 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using eTUITOR.Models;
 
 namespace eTUITOR.Controllers
 {
     public class HomeController : Controller
     {
+        eTUTOREntities model = new eTUTOREntities();
         public ActionResult Index()
         {
-            ViewBag.Message = "Login admin.";
+            
             return View();
         }
-
+        [HttpPost]
+        public ActionResult Index( string username, string password)
+        {
+           ;
+            var admin = model.admins.FirstOrDefault(x => x.username == username);
+            if (admin != null)
+            {
+                if (admin.password.Equals(password))
+                {
+                    Session["UserID"] = admin.admin_id;
+                    return RedirectToAction("Dashboard", "Home");
+                }
+            }
+            
+            else
+            {
+                ViewBag.mgs = "tài khoản không tồn tại";
+            }
+            return View();
+        }
         public ActionResult Course()
         {
             ViewBag.Message = "Course Management.";
@@ -57,3 +78,6 @@ namespace eTUITOR.Controllers
         }
     }
 }
+        
+
+
