@@ -21,6 +21,7 @@ namespace eTUITOR.Models
             this.history_lessons = new HashSet<history_lessons>();
             this.schedules = new HashSet<schedule>();
             this.sessions = new HashSet<session>();
+            this.contact_tutor = new HashSet<contact_tutor>();
         }
     
         public int tutor_id { get; set; }
@@ -36,6 +37,7 @@ namespace eTUITOR.Models
         public string experience { get; set; }
         public string certificate { get; set; }
         public Nullable<int> status { get; set; }
+        public string avatar { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<comment> comments { get; set; }
@@ -46,5 +48,7 @@ namespace eTUITOR.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<session> sessions { get; set; }
         public virtual status status1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<contact_tutor> contact_tutor { get; set; }
     }
 }

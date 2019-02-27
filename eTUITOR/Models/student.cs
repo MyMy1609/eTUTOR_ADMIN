@@ -28,6 +28,11 @@ namespace eTUITOR.Models
         public string password { get; set; }
         public Nullable<int> status { get; set; }
         public Nullable<int> parent_id { get; set; }
+        public string email { get; set; }
+        public Nullable<int> @class { get; set; }
+        public string avatar { get; set; }
+        public string phone { get; set; }
+        public Nullable<System.DateTime> birthday { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<comment> comments { get; set; }

@@ -153,6 +153,12 @@
     <Compile Include="Models\contact.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\contact_admin.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\contact_tutor.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\history_lessons.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

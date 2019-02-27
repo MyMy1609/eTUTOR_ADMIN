@@ -16,12 +16,9 @@
         <EntityTypeShape EntityType="capstone2019Model.session" Width="1.5" PointX="7.5" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="capstone2019Model.status" Width="1.5" PointX="0.75" PointY="8.5" IsExpanded="true" />
         <EntityTypeShape EntityType="capstone2019Model.student" Width="1.5" PointX="5.25" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="capstone2019Model.submenu" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="capstone2019Model.sysdiagram" Width="1.5" PointX="9.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="capstone2019Model.tutor" Width="1.5" PointX="3" PointY="9.25" IsExpanded="true" />
         <AssociationConnector Association="capstone2019Model.FK_comment_student" ManuallyRouted="false" />
         <AssociationConnector Association="capstone2019Model.FK_comment_tutor" ManuallyRouted="false" />
-        <AssociationConnector Association="capstone2019Model.FK_submenu_common" ManuallyRouted="false" />
         <AssociationConnector Association="capstone2019Model.FK_history_lessons_student" ManuallyRouted="false" />
         <AssociationConnector Association="capstone2019Model.FK_history_lessons_tutor" ManuallyRouted="false" />
         <AssociationConnector Association="capstone2019Model.FK_parent_status" ManuallyRouted="false" />
@@ -31,6 +28,9 @@
         <AssociationConnector Association="capstone2019Model.FK_session_student" ManuallyRouted="false" />
         <AssociationConnector Association="capstone2019Model.FK_session_tutor" ManuallyRouted="false" />
         <AssociationConnector Association="capstone2019Model.FK_tutor_status" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="capstone2019Model.contact_admin" Width="1.5" PointX="7.375" PointY="11.75" />
+        <EntityTypeShape EntityType="capstone2019Model.contact_tutor" Width="1.5" PointX="5.25" PointY="13.5" />
+        <AssociationConnector Association="capstone2019Model.FK_contatc_tutor_tutor" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

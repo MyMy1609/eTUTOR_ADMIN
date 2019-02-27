@@ -71,6 +71,7 @@
     <EntitySetMapping Name="parents">
       <EntityTypeMapping TypeName="capstone2019Model.parent">
         <MappingFragment StoreEntitySet="parents">
+          <ScalarProperty Name="avatar" ColumnName="avatar" />
           <ScalarProperty Name="parent_id" ColumnName="parent_id" />
           <ScalarProperty Name="fullname" ColumnName="fullname" />
           <ScalarProperty Name="username" ColumnName="username" />
@@ -123,6 +124,11 @@
     <EntitySetMapping Name="students">
       <EntityTypeMapping TypeName="capstone2019Model.student">
         <MappingFragment StoreEntitySet="students">
+          <ScalarProperty Name="birthday" ColumnName="birthday" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="avatar" ColumnName="avatar" />
+          <ScalarProperty Name="class" ColumnName="class" />
+          <ScalarProperty Name="email" ColumnName="email" />
           <ScalarProperty Name="student_id" ColumnName="student_id" />
           <ScalarProperty Name="fullname" ColumnName="fullname" />
           <ScalarProperty Name="username" ColumnName="username" />
@@ -155,6 +161,7 @@
     <EntitySetMapping Name="tutors">
       <EntityTypeMapping TypeName="capstone2019Model.tutor">
         <MappingFragment StoreEntitySet="tutors">
+          <ScalarProperty Name="avatar" ColumnName="avatar" />
           <ScalarProperty Name="tutor_id" ColumnName="tutor_id" />
           <ScalarProperty Name="fullname" ColumnName="fullname" />
           <ScalarProperty Name="username" ColumnName="username" />
@@ -168,6 +175,30 @@
           <ScalarProperty Name="experience" ColumnName="experience" />
           <ScalarProperty Name="certificate" ColumnName="certificate" />
           <ScalarProperty Name="status" ColumnName="status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="contact_admin">
+      <EntityTypeMapping TypeName="capstone2019Model.contact_admin">
+        <MappingFragment StoreEntitySet="contact_admin">
+          <ScalarProperty Name="content" ColumnName="content" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="fullname" ColumnName="fullname" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="contact_tutor">
+      <EntityTypeMapping TypeName="capstone2019Model.contact_tutor">
+        <MappingFragment StoreEntitySet="contact_tutor">
+          <ScalarProperty Name="tutor_id" ColumnName="tutor_id" />
+          <ScalarProperty Name="content" ColumnName="content" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="fullname" ColumnName="fullname" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

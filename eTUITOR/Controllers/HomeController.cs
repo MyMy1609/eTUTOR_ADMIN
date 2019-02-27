@@ -16,25 +16,26 @@ namespace eTUITOR.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Index( string username, string password)
+        public ActionResult Index( string email, string password)
         {
            ;
-            var admin = model.admins.FirstOrDefault(x => x.username == username);
+            var admin = model.admins.FirstOrDefault(x => x.email == email);
             if (admin != null)
             {
                 if (admin.password.Equals(password))
                 {
+                    Session["FullName"] = admin.fullname;
                     Session["UserID"] = admin.admin_id;
                     return RedirectToAction("Dashboard", "Home");
                 }
             }
-            
             else
             {
                 ViewBag.mgs = "tài khoản không tồn tại";
             }
             return View();
         }
+        
         public ActionResult Course()
         {
             ViewBag.Message = "Course Management.";

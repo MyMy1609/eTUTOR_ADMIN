@@ -62,20 +62,20 @@
                                 <div class="card-header card-header-info text-center" style="background: linear-gradient(60deg,#111212,#595a5a);">
                                     <h4 class="card-title">Đăng nhập</h4>
                                     <div class="social-line">
-                                        <a href="#pablo" class="btn btn-just-icon btn-link btn-white">
+                                        <a href="#" class="btn btn-just-icon btn-link btn-white">
                                             <i class="fa fa-facebook-square"></i>
                                         </a>
-                                        <a href="#pablo" class="btn btn-just-icon btn-link btn-white">
+                                        <a href="#" class="btn btn-just-icon btn-link btn-white">
                                             <i class="fa fa-twitter"></i>
                                         </a>
-                                        <a href="#pablo" class="btn btn-just-icon btn-link btn-white">
+                                        <a href="#" class="btn btn-just-icon btn-link btn-white">
                                             <i class="fa fa-google-plus"></i>
                                         </a>
                                     </div>
                                 </div>
                                 <div class="card-body ">
                                     <p class="card-description text-center">Or Be Classical</p>
-                                    <span class="bmd-form-group">
+                                    @*<span class="bmd-form-group">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">
@@ -83,6 +83,16 @@
                                                 </span>
                                             </div>
                                             <input type="text" class="form-control" placeholder="username..." name="username">
+                                        </div>
+                                    </span>*@
+                                    <span class="bmd-form-group">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="material-icons">email</i>
+                                                </span>
+                                            </div>
+                                            <input type="email" class="form-control" placeholder="Email..." name="email">
                                         </div>
                                     </span>
                                     <span class="bmd-form-group">
@@ -96,9 +106,9 @@
                                         </div>
                                     </span>
                                 </div>
-                                <div class="card-footer justify-content-center">
-                                    <a href="@Url.Action("dashboard","Home")" class="btn btn-rose btn-link btn-lg">Lets Go</a>
-                                </div>
+                                <button type="submit">
+                                    <span>Đăng nhập</span>
+                                </button>
                             </div>
                         </form>
                     </div>

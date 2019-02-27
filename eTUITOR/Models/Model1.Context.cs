@@ -39,5 +39,7 @@ namespace eTUITOR.Models
         public virtual DbSet<submenu> submenus { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<tutor> tutors { get; set; }
+        public virtual DbSet<contact_admin> contact_admin { get; set; }
+        public virtual DbSet<contact_tutor> contact_tutor { get; set; }
     }
 }
