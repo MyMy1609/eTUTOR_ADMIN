@@ -35,7 +35,16 @@ namespace eTUITOR.Controllers
             }
             return View();
         }
-        
+        public ActionResult Logout(int id)
+        {
+            var user = model.admins.FirstOrDefault(x => x.admin_id == id);
+            if (user != null)
+            {
+                Session["FullName"] = null;
+                Session["UserID"] = null;
+            }
+            return RedirectToAction("Login");
+        }
         public ActionResult Course()
         {
             ViewBag.Message = "Course Management.";
