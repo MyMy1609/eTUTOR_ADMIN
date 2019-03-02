@@ -1,7 +1,11 @@
-﻿
+﻿@model eTUITOR.Models.tutor
+@using eTUITOR.Models;
+
 @{
     ViewBag.Title = "Course Management";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    eTUTOREntities db = new eTUTOREntities();
+    var sessionlist = ViewData["sessionlist"] as List<eTUITOR.Models.session>;
 }
 
 <!DOCTYPE html>
@@ -14,7 +18,7 @@
     <title>Course Management</title>
     <base href="../../../assets/">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
-
+    @section css {
     <link href="~/Content/build/css/font-awesome.min.css" rel="stylesheet" />
     <!-- CSS Files -->
     <link href="~/Content/build/css/material-dashboard.css" rel="stylesheet" />
@@ -23,6 +27,7 @@
     <!-- Google Tag Manager -->
     <link href="~/Content/build/css/switch.css" rel="stylesheet" />
     <link href="~/Content/vendor/lightbox2/dist/css/lightbox.min.css" rel="stylesheet" />
+        }
     <script>
         (function (w, d, s, l, i) {
             w[l] = w[l] || [];
@@ -74,32 +79,37 @@
                                        cellspacing="0" width="100%" style="width:100%">
                                     <thead>
                                         <tr>
-                                            <th style="width: 50px;">ID</th>
+                                            @*<th style="width: 50px;">ID</th>*@
                                             <th>TÊN GIA SƯ</th>
                                             <th>THỨ</th>
                                             <th>THỜI GIAN</th>
                                             <th>HỌC SINH</th>
                                             <th>MÔN HỌC</th>
-                                            <th style="width: 60px">LỚP</th>
-                                            <th>BUỔI ĐANG HỌC</th>
-                                            <th>BUỔI ĐÃ HỌC</th>
+                                            @*<th style="width: 60px">LỚP</th>*@
+                                            @*<th>BUỔI ĐANG HỌC</th>
+                                            <th>BUỔI ĐÃ HỌC</th>*@
                                             <th>TRẠNG THÁI</th>
+                                            <th>DUYỆT</th>
 
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>An Nguyễn</td>
-                                            <td>2</td>
-                                            <td>7h30 - 9h30</td>
-                                            <td>Tiểu My</td>
-                                            <td>Giáo dục công dân</td>
-                                            <td>13</td>
-                                            <td>30</td>
-                                            <td>2</td>
-                                            <td><input type="checkbox" class="checkbox-switch" /></td>
-                                        </tr>
+                                        @foreach (var session in sessionlist)
+                                        {
+                                            <tr>
+                                                @*<td>1</td>*@
+                                                <td>@session.tutor.fullname</td>
+                                                <td>@session.day_otw</td>
+                                                <td>@session.start_time - @session.end_time</td>
+                                                <td>@session.student.fullname</td>
+                                                <td>@session.tutor.specialized</td>
+                                                <td>@session.status.name</td>
+                                                @*<td>30</td>
+                                                <td>2</td>*@
+                                                <td><input type="checkbox" class="checkbox-switch" name="check" id="slider-duyet" onchange="duyetstudent(@session.session_id)"></td>
+                                            </tr>
+                                        }
+
                                     </tbody>
                                 </table>
                             </div>

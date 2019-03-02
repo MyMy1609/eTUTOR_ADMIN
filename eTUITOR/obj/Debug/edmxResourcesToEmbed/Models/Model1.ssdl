@@ -91,7 +91,7 @@
     <Property Name="fullname" Type="nvarchar" MaxLength="30" />
     <Property Name="username" Type="nvarchar" MaxLength="30" />
     <Property Name="email" Type="nvarchar" MaxLength="50" />
-    <Property Name="password" Type="nvarchar" MaxLength="255" />
+    <Property Name="password" Type="nvarchar(max)" />
     <Property Name="phone" Type="nvarchar" MaxLength="15" />
     <Property Name="address" Type="nvarchar" MaxLength="255" />
     <Property Name="birthday" Type="date" />
@@ -106,8 +106,8 @@
     <Property Name="day_otw" Type="nvarchar" MaxLength="10" Nullable="false" />
     <Property Name="start_time" Type="time" Precision="7" />
     <Property Name="end_time" Type="time" Precision="7" />
-    <Property Name="note" Type="nvarchar" MaxLength="50" />
-    <Property Name="status" Type="bit" />
+    <Property Name="note" Type="nvarchar(max)" />
+    <Property Name="status" Type="int" />
     <Property Name="tutor_id" Type="int" />
   </EntityType>
   <EntityType Name="sessions">
@@ -117,13 +117,15 @@
     <Property Name="session_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="tutor_id" Type="int" />
     <Property Name="student_id" Type="int" />
-    <Property Name="subject" Type="nvarchar" MaxLength="20" />
     <Property Name="class" Type="nvarchar" MaxLength="10" />
     <Property Name="start_time" Type="time" Precision="7" />
     <Property Name="end_time" Type="time" Precision="7" />
     <Property Name="total_sessions" Type="int" />
     <Property Name="day_otw" Type="nvarchar" MaxLength="10" />
     <Property Name="status_id" Type="int" />
+    <Property Name="status_tutor" Type="int" />
+    <Property Name="status_admin" Type="int" />
+    <Property Name="subject_id" Type="int" />
   </EntityType>
   <EntityType Name="status">
     <Key>
@@ -139,7 +141,7 @@
     <Property Name="student_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="fullname" Type="nvarchar" MaxLength="50" />
     <Property Name="username" Type="nvarchar" MaxLength="50" />
-    <Property Name="password" Type="nvarchar" MaxLength="255" />
+    <Property Name="password" Type="nvarchar(max)" />
     <Property Name="status" Type="int" />
     <Property Name="parent_id" Type="int" />
     <Property Name="email" Type="nvarchar" MaxLength="255" />
@@ -147,6 +149,14 @@
     <Property Name="avatar" Type="nvarchar" MaxLength="255" />
     <Property Name="phone" Type="nvarchar" MaxLength="15" />
     <Property Name="birthday" Type="date" />
+  </EntityType>
+  <EntityType Name="subject">
+    <Key>
+      <PropertyRef Name="subject_id" />
+    </Key>
+    <Property Name="subject_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tutor_id" Type="int" Nullable="false" />
+    <Property Name="subject_name" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="submenu">
     <Key>
@@ -171,20 +181,72 @@
       <PropertyRef Name="tutor_id" />
     </Key>
     <Property Name="tutor_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="fullname" Type="nvarchar" MaxLength="50" />
-    <Property Name="username" Type="nvarchar" MaxLength="50" />
+    <Property Name="fullname" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="username" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="email" Type="nvarchar" MaxLength="100" />
-    <Property Name="password" Type="nvarchar" MaxLength="255" />
+    <Property Name="password" Type="nvarchar(max)" />
     <Property Name="phone" Type="nvarchar" MaxLength="15" />
     <Property Name="address" Type="nvarchar" MaxLength="255" />
     <Property Name="birthday" Type="date" />
-    <Property Name="specialized" Type="nvarchar" MaxLength="255" />
+    <Property Name="specialized" Type="nvarchar" MaxLength="255" Nullable="false" />
     <Property Name="job" Type="nvarchar" MaxLength="100" />
     <Property Name="experience" Type="nvarchar" MaxLength="100" />
     <Property Name="certificate" Type="nvarchar" MaxLength="100" />
     <Property Name="status" Type="int" />
     <Property Name="avatar" Type="nvarchar" MaxLength="255" />
   </EntityType>
+  <EntityType Name="typeUser">
+    <Key>
+      <PropertyRef Name="tu_id" />
+    </Key>
+    <Property Name="tu_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tu_name" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="us_id" />
+    </Key>
+    <Property Name="us_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="us_usname" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="us_pw" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="us_type" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__sessions__subjec__1BC821DD">
+    <End Role="subject" Type="Self.subject" Multiplicity="0..1" />
+    <End Role="sessions" Type="Self.sessions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="subject">
+        <PropertyRef Name="subject_id" />
+      </Principal>
+      <Dependent Role="sessions">
+        <PropertyRef Name="subject_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__subject__tutor_i__19DFD96B">
+    <End Role="tutors" Type="Self.tutors" Multiplicity="1" />
+    <End Role="subject" Type="Self.subject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tutors">
+        <PropertyRef Name="tutor_id" />
+      </Principal>
+      <Dependent Role="subject">
+        <PropertyRef Name="tutor_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Users__us_type__208CD6FA">
+    <End Role="typeUser" Type="Self.typeUser" Multiplicity="1" />
+    <End Role="Users" Type="Self.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="typeUser">
+        <PropertyRef Name="tu_id" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="us_type" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_comment_student">
     <End Role="students" Type="Self.students" Multiplicity="0..1" />
     <End Role="comments" Type="Self.comments" Multiplicity="*" />
@@ -269,6 +331,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_schedule_status">
+    <End Role="status" Type="Self.status" Multiplicity="0..1" />
+    <End Role="schedules" Type="Self.schedules" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="status">
+        <PropertyRef Name="status_id" />
+      </Principal>
+      <Dependent Role="schedules">
+        <PropertyRef Name="status" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_schedule_tutor">
     <End Role="tutors" Type="Self.tutors" Multiplicity="0..1" />
     <End Role="schedules" Type="Self.schedules" Multiplicity="*" />
@@ -290,6 +364,30 @@
       </Principal>
       <Dependent Role="sessions">
         <PropertyRef Name="status_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_session_status_admin">
+    <End Role="status" Type="Self.status" Multiplicity="0..1" />
+    <End Role="sessions" Type="Self.sessions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="status">
+        <PropertyRef Name="status_id" />
+      </Principal>
+      <Dependent Role="sessions">
+        <PropertyRef Name="status_admin" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_session_status_tutor">
+    <End Role="status" Type="Self.status" Multiplicity="0..1" />
+    <End Role="sessions" Type="Self.sessions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="status">
+        <PropertyRef Name="status_id" />
+      </Principal>
+      <Dependent Role="sessions">
+        <PropertyRef Name="status_tutor" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -355,9 +453,24 @@
     <EntitySet Name="sessions" EntityType="Self.sessions" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="status" EntityType="Self.status" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="students" EntityType="Self.students" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="subject" EntityType="Self.subject" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="submenu" EntityType="Self.submenu" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tutors" EntityType="Self.tutors" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="typeUser" EntityType="Self.typeUser" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__sessions__subjec__1BC821DD" Association="Self.FK__sessions__subjec__1BC821DD">
+      <End Role="subject" EntitySet="subject" />
+      <End Role="sessions" EntitySet="sessions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__subject__tutor_i__19DFD96B" Association="Self.FK__subject__tutor_i__19DFD96B">
+      <End Role="tutors" EntitySet="tutors" />
+      <End Role="subject" EntitySet="subject" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Users__us_type__208CD6FA" Association="Self.FK__Users__us_type__208CD6FA">
+      <End Role="typeUser" EntitySet="typeUser" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
     <AssociationSet Name="FK_comment_student" Association="Self.FK_comment_student">
       <End Role="students" EntitySet="students" />
       <End Role="comments" EntitySet="comments" />
@@ -386,11 +499,23 @@
       <End Role="parents" EntitySet="parents" />
       <End Role="students" EntitySet="students" />
     </AssociationSet>
+    <AssociationSet Name="FK_schedule_status" Association="Self.FK_schedule_status">
+      <End Role="status" EntitySet="status" />
+      <End Role="schedules" EntitySet="schedules" />
+    </AssociationSet>
     <AssociationSet Name="FK_schedule_tutor" Association="Self.FK_schedule_tutor">
       <End Role="tutors" EntitySet="tutors" />
       <End Role="schedules" EntitySet="schedules" />
     </AssociationSet>
     <AssociationSet Name="FK_session_status" Association="Self.FK_session_status">
+      <End Role="status" EntitySet="status" />
+      <End Role="sessions" EntitySet="sessions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_session_status_admin" Association="Self.FK_session_status_admin">
+      <End Role="status" EntitySet="status" />
+      <End Role="sessions" EntitySet="sessions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_session_status_tutor" Association="Self.FK_session_status_tutor">
       <End Role="status" EntitySet="status" />
       <End Role="sessions" EntitySet="sessions" />
     </AssociationSet>

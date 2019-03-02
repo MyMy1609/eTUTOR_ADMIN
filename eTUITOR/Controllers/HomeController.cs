@@ -47,8 +47,11 @@ namespace eTUITOR.Controllers
         }
         public ActionResult Course()
         {
-            ViewBag.Message = "Course Management.";
-            return View();
+            var tutor_id = int.Parse(Session["UserID"].ToString());
+            var info = model.tutors.FirstOrDefault(x => x.tutor_id == tutor_id);
+            List<session> sessionList = model.sessions.Where(x => x.tutor_id == tutor_id && x.status_tutor == 1 || x.status_admin == 2).ToList();
+            ViewData["sessionlist"] = sessionList;
+            return View(info);
         }
 
         public ActionResult Dashboard()

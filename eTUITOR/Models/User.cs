@@ -12,17 +12,13 @@ namespace eTUITOR.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class schedule
+    public partial class User
     {
-        public int schedule_id { get; set; }
-        public string day_otw { get; set; }
-        public Nullable<System.TimeSpan> start_time { get; set; }
-        public Nullable<System.TimeSpan> end_time { get; set; }
-        public string note { get; set; }
-        public Nullable<int> status { get; set; }
-        public Nullable<int> tutor_id { get; set; }
+        public int us_id { get; set; }
+        public string us_usname { get; set; }
+        public string us_pw { get; set; }
+        public int us_type { get; set; }
     
-        public virtual status status1 { get; set; }
-        public virtual tutor tutor { get; set; }
+        public virtual typeUser typeUser { get; set; }
     }
 }

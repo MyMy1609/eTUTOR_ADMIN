@@ -12,17 +12,18 @@ namespace eTUITOR.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class schedule
+    public partial class typeUser
     {
-        public int schedule_id { get; set; }
-        public string day_otw { get; set; }
-        public Nullable<System.TimeSpan> start_time { get; set; }
-        public Nullable<System.TimeSpan> end_time { get; set; }
-        public string note { get; set; }
-        public Nullable<int> status { get; set; }
-        public Nullable<int> tutor_id { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public typeUser()
+        {
+            this.Users = new HashSet<User>();
+        }
     
-        public virtual status status1 { get; set; }
-        public virtual tutor tutor { get; set; }
+        public int tu_id { get; set; }
+        public string tu_name { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<User> Users { get; set; }
     }
 }

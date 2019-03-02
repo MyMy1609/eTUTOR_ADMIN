@@ -1,143 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="capstone2019ModelStoreContainer" CdmEntityContainer="eTUTOREntities">
-    <EntitySetMapping Name="abouts">
-      <EntityTypeMapping TypeName="capstone2019Model.about">
-        <MappingFragment StoreEntitySet="about">
-          <ScalarProperty Name="about_id" ColumnName="about_id" />
-          <ScalarProperty Name="title" ColumnName="title" />
-          <ScalarProperty Name="content" ColumnName="content" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="admins">
-      <EntityTypeMapping TypeName="capstone2019Model.admin">
-        <MappingFragment StoreEntitySet="admin">
-          <ScalarProperty Name="admin_id" ColumnName="admin_id" />
-          <ScalarProperty Name="fullname" ColumnName="fullname" />
-          <ScalarProperty Name="username" ColumnName="username" />
-          <ScalarProperty Name="email" ColumnName="email" />
-          <ScalarProperty Name="password" ColumnName="password" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="comments">
-      <EntityTypeMapping TypeName="capstone2019Model.comment">
-        <MappingFragment StoreEntitySet="comments">
-          <ScalarProperty Name="comment_id" ColumnName="comment_id" />
-          <ScalarProperty Name="student_id" ColumnName="student_id" />
-          <ScalarProperty Name="content" ColumnName="content" />
-          <ScalarProperty Name="tutor_id" ColumnName="tutor_id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="commons">
-      <EntityTypeMapping TypeName="capstone2019Model.common">
-        <MappingFragment StoreEntitySet="common">
-          <ScalarProperty Name="common_id" ColumnName="common_id" />
-          <ScalarProperty Name="menu" ColumnName="menu" />
-          <ScalarProperty Name="header" ColumnName="header" />
-          <ScalarProperty Name="footer" ColumnName="footer" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="contacts">
-      <EntityTypeMapping TypeName="capstone2019Model.contact">
-        <MappingFragment StoreEntitySet="contacts">
-          <ScalarProperty Name="contact_id" ColumnName="contact_id" />
-          <ScalarProperty Name="fullname" ColumnName="fullname" />
-          <ScalarProperty Name="email" ColumnName="email" />
-          <ScalarProperty Name="phone" ColumnName="phone" />
-          <ScalarProperty Name="content" ColumnName="content" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="history_lessons">
-      <EntityTypeMapping TypeName="capstone2019Model.history_lessons">
-        <MappingFragment StoreEntitySet="history_lessons">
-          <ScalarProperty Name="hl_id" ColumnName="hl_id" />
-          <ScalarProperty Name="tutor_id" ColumnName="tutor_id" />
-          <ScalarProperty Name="student_id" ColumnName="student_id" />
-          <ScalarProperty Name="subject" ColumnName="subject" />
-          <ScalarProperty Name="class" ColumnName="class" />
-          <ScalarProperty Name="start_time" ColumnName="start_time" />
-          <ScalarProperty Name="end_time" ColumnName="end_time" />
-          <ScalarProperty Name="total_sessions" ColumnName="total_sessions" />
-          <ScalarProperty Name="day_otw" ColumnName="day_otw" />
-          <ScalarProperty Name="day" ColumnName="day" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="parents">
-      <EntityTypeMapping TypeName="capstone2019Model.parent">
-        <MappingFragment StoreEntitySet="parents">
-          <ScalarProperty Name="avatar" ColumnName="avatar" />
-          <ScalarProperty Name="parent_id" ColumnName="parent_id" />
-          <ScalarProperty Name="fullname" ColumnName="fullname" />
-          <ScalarProperty Name="username" ColumnName="username" />
-          <ScalarProperty Name="email" ColumnName="email" />
-          <ScalarProperty Name="password" ColumnName="password" />
-          <ScalarProperty Name="phone" ColumnName="phone" />
-          <ScalarProperty Name="address" ColumnName="address" />
-          <ScalarProperty Name="birthday" ColumnName="birthday" />
-          <ScalarProperty Name="status" ColumnName="status" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="schedules">
-      <EntityTypeMapping TypeName="capstone2019Model.schedule">
-        <MappingFragment StoreEntitySet="schedules">
-          <ScalarProperty Name="schedule_id" ColumnName="schedule_id" />
-          <ScalarProperty Name="day_otw" ColumnName="day_otw" />
-          <ScalarProperty Name="start_time" ColumnName="start_time" />
-          <ScalarProperty Name="end_time" ColumnName="end_time" />
-          <ScalarProperty Name="note" ColumnName="note" />
-          <ScalarProperty Name="status" ColumnName="status" />
-          <ScalarProperty Name="tutor_id" ColumnName="tutor_id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="sessions">
-      <EntityTypeMapping TypeName="capstone2019Model.session">
-        <MappingFragment StoreEntitySet="sessions">
-          <ScalarProperty Name="session_id" ColumnName="session_id" />
-          <ScalarProperty Name="tutor_id" ColumnName="tutor_id" />
-          <ScalarProperty Name="student_id" ColumnName="student_id" />
-          <ScalarProperty Name="subject" ColumnName="subject" />
-          <ScalarProperty Name="class" ColumnName="class" />
-          <ScalarProperty Name="start_time" ColumnName="start_time" />
-          <ScalarProperty Name="end_time" ColumnName="end_time" />
-          <ScalarProperty Name="total_sessions" ColumnName="total_sessions" />
-          <ScalarProperty Name="day_otw" ColumnName="day_otw" />
-          <ScalarProperty Name="status_id" ColumnName="status_id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="status">
-      <EntityTypeMapping TypeName="capstone2019Model.status">
-        <MappingFragment StoreEntitySet="status">
-          <ScalarProperty Name="status_id" ColumnName="status_id" />
-          <ScalarProperty Name="name" ColumnName="name" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="students">
-      <EntityTypeMapping TypeName="capstone2019Model.student">
-        <MappingFragment StoreEntitySet="students">
-          <ScalarProperty Name="birthday" ColumnName="birthday" />
-          <ScalarProperty Name="phone" ColumnName="phone" />
-          <ScalarProperty Name="avatar" ColumnName="avatar" />
-          <ScalarProperty Name="class" ColumnName="class" />
-          <ScalarProperty Name="email" ColumnName="email" />
-          <ScalarProperty Name="student_id" ColumnName="student_id" />
-          <ScalarProperty Name="fullname" ColumnName="fullname" />
-          <ScalarProperty Name="username" ColumnName="username" />
-          <ScalarProperty Name="password" ColumnName="password" />
-          <ScalarProperty Name="status" ColumnName="status" />
-          <ScalarProperty Name="parent_id" ColumnName="parent_id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="submenus">
       <EntityTypeMapping TypeName="capstone2019Model.submenu">
         <MappingFragment StoreEntitySet="submenu">
@@ -158,23 +21,43 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="tutors">
-      <EntityTypeMapping TypeName="capstone2019Model.tutor">
-        <MappingFragment StoreEntitySet="tutors">
-          <ScalarProperty Name="avatar" ColumnName="avatar" />
-          <ScalarProperty Name="tutor_id" ColumnName="tutor_id" />
-          <ScalarProperty Name="fullname" ColumnName="fullname" />
-          <ScalarProperty Name="username" ColumnName="username" />
-          <ScalarProperty Name="email" ColumnName="email" />
+    <EntitySetMapping Name="abouts">
+      <EntityTypeMapping TypeName="capstone2019Model.about">
+        <MappingFragment StoreEntitySet="about">
+          <ScalarProperty Name="content" ColumnName="content" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="about_id" ColumnName="about_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="admins">
+      <EntityTypeMapping TypeName="capstone2019Model.admin">
+        <MappingFragment StoreEntitySet="admin">
           <ScalarProperty Name="password" ColumnName="password" />
-          <ScalarProperty Name="phone" ColumnName="phone" />
-          <ScalarProperty Name="address" ColumnName="address" />
-          <ScalarProperty Name="birthday" ColumnName="birthday" />
-          <ScalarProperty Name="specialized" ColumnName="specialized" />
-          <ScalarProperty Name="job" ColumnName="job" />
-          <ScalarProperty Name="experience" ColumnName="experience" />
-          <ScalarProperty Name="certificate" ColumnName="certificate" />
-          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="fullname" ColumnName="fullname" />
+          <ScalarProperty Name="admin_id" ColumnName="admin_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="comments">
+      <EntityTypeMapping TypeName="capstone2019Model.comment">
+        <MappingFragment StoreEntitySet="comments">
+          <ScalarProperty Name="tutor_id" ColumnName="tutor_id" />
+          <ScalarProperty Name="content" ColumnName="content" />
+          <ScalarProperty Name="student_id" ColumnName="student_id" />
+          <ScalarProperty Name="comment_id" ColumnName="comment_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="commons">
+      <EntityTypeMapping TypeName="capstone2019Model.common">
+        <MappingFragment StoreEntitySet="common">
+          <ScalarProperty Name="footer" ColumnName="footer" />
+          <ScalarProperty Name="header" ColumnName="header" />
+          <ScalarProperty Name="menu" ColumnName="menu" />
+          <ScalarProperty Name="common_id" ColumnName="common_id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -199,6 +82,152 @@
           <ScalarProperty Name="email" ColumnName="email" />
           <ScalarProperty Name="fullname" ColumnName="fullname" />
           <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="contacts">
+      <EntityTypeMapping TypeName="capstone2019Model.contact">
+        <MappingFragment StoreEntitySet="contacts">
+          <ScalarProperty Name="content" ColumnName="content" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="fullname" ColumnName="fullname" />
+          <ScalarProperty Name="contact_id" ColumnName="contact_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="history_lessons">
+      <EntityTypeMapping TypeName="capstone2019Model.history_lessons">
+        <MappingFragment StoreEntitySet="history_lessons">
+          <ScalarProperty Name="day" ColumnName="day" />
+          <ScalarProperty Name="day_otw" ColumnName="day_otw" />
+          <ScalarProperty Name="total_sessions" ColumnName="total_sessions" />
+          <ScalarProperty Name="end_time" ColumnName="end_time" />
+          <ScalarProperty Name="start_time" ColumnName="start_time" />
+          <ScalarProperty Name="class" ColumnName="class" />
+          <ScalarProperty Name="subject" ColumnName="subject" />
+          <ScalarProperty Name="student_id" ColumnName="student_id" />
+          <ScalarProperty Name="tutor_id" ColumnName="tutor_id" />
+          <ScalarProperty Name="hl_id" ColumnName="hl_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="parents">
+      <EntityTypeMapping TypeName="capstone2019Model.parent">
+        <MappingFragment StoreEntitySet="parents">
+          <ScalarProperty Name="avatar" ColumnName="avatar" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="birthday" ColumnName="birthday" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="fullname" ColumnName="fullname" />
+          <ScalarProperty Name="parent_id" ColumnName="parent_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="schedules">
+      <EntityTypeMapping TypeName="capstone2019Model.schedule">
+        <MappingFragment StoreEntitySet="schedules">
+          <ScalarProperty Name="tutor_id" ColumnName="tutor_id" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="note" ColumnName="note" />
+          <ScalarProperty Name="end_time" ColumnName="end_time" />
+          <ScalarProperty Name="start_time" ColumnName="start_time" />
+          <ScalarProperty Name="day_otw" ColumnName="day_otw" />
+          <ScalarProperty Name="schedule_id" ColumnName="schedule_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sessions">
+      <EntityTypeMapping TypeName="capstone2019Model.session">
+        <MappingFragment StoreEntitySet="sessions">
+          <ScalarProperty Name="subject_id" ColumnName="subject_id" />
+          <ScalarProperty Name="status_admin" ColumnName="status_admin" />
+          <ScalarProperty Name="status_tutor" ColumnName="status_tutor" />
+          <ScalarProperty Name="status_id" ColumnName="status_id" />
+          <ScalarProperty Name="day_otw" ColumnName="day_otw" />
+          <ScalarProperty Name="total_sessions" ColumnName="total_sessions" />
+          <ScalarProperty Name="end_time" ColumnName="end_time" />
+          <ScalarProperty Name="start_time" ColumnName="start_time" />
+          <ScalarProperty Name="class" ColumnName="class" />
+          <ScalarProperty Name="student_id" ColumnName="student_id" />
+          <ScalarProperty Name="tutor_id" ColumnName="tutor_id" />
+          <ScalarProperty Name="session_id" ColumnName="session_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="status">
+      <EntityTypeMapping TypeName="capstone2019Model.status">
+        <MappingFragment StoreEntitySet="status">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="status_id" ColumnName="status_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="students">
+      <EntityTypeMapping TypeName="capstone2019Model.student">
+        <MappingFragment StoreEntitySet="students">
+          <ScalarProperty Name="birthday" ColumnName="birthday" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="avatar" ColumnName="avatar" />
+          <ScalarProperty Name="class" ColumnName="class" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="parent_id" ColumnName="parent_id" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="fullname" ColumnName="fullname" />
+          <ScalarProperty Name="student_id" ColumnName="student_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="subjects">
+      <EntityTypeMapping TypeName="capstone2019Model.subject">
+        <MappingFragment StoreEntitySet="subject">
+          <ScalarProperty Name="subject_name" ColumnName="subject_name" />
+          <ScalarProperty Name="tutor_id" ColumnName="tutor_id" />
+          <ScalarProperty Name="subject_id" ColumnName="subject_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tutors">
+      <EntityTypeMapping TypeName="capstone2019Model.tutor">
+        <MappingFragment StoreEntitySet="tutors">
+          <ScalarProperty Name="avatar" ColumnName="avatar" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="certificate" ColumnName="certificate" />
+          <ScalarProperty Name="experience" ColumnName="experience" />
+          <ScalarProperty Name="job" ColumnName="job" />
+          <ScalarProperty Name="specialized" ColumnName="specialized" />
+          <ScalarProperty Name="birthday" ColumnName="birthday" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="fullname" ColumnName="fullname" />
+          <ScalarProperty Name="tutor_id" ColumnName="tutor_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="typeUsers">
+      <EntityTypeMapping TypeName="capstone2019Model.typeUser">
+        <MappingFragment StoreEntitySet="typeUser">
+          <ScalarProperty Name="tu_name" ColumnName="tu_name" />
+          <ScalarProperty Name="tu_id" ColumnName="tu_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="capstone2019Model.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="us_type" ColumnName="us_type" />
+          <ScalarProperty Name="us_pw" ColumnName="us_pw" />
+          <ScalarProperty Name="us_usname" ColumnName="us_usname" />
+          <ScalarProperty Name="us_id" ColumnName="us_id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
