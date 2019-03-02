@@ -27,6 +27,7 @@
     <!-- Google Tag Manager -->
     <link href="~/Content/build/css/switch.css" rel="stylesheet" />
     <link href="~/Content/vendor/lightbox2/dist/css/lightbox.min.css" rel="stylesheet" />
+    <link href="~/Content/build/css/TutorHomePage.component.css" rel="stylesheet" />
         }
     <script>
         (function (w, d, s, l, i) {
@@ -96,18 +97,28 @@
                                     <tbody>
                                         @foreach (var session in sessionlist)
                                         {
-                                            <tr>
-                                                @*<td>1</td>*@
-                                                <td>@session.tutor.fullname</td>
-                                                <td>@session.day_otw</td>
-                                                <td>@session.start_time - @session.end_time</td>
-                                                <td>@session.student.fullname</td>
-                                                <td>@session.tutor.specialized</td>
-                                                <td>@session.status.name</td>
-                                                @*<td>30</td>
-                                                <td>2</td>*@
-                                                <td><input type="checkbox" class="checkbox-switch" name="check" id="slider-duyet" onchange="duyetstudent(@session.session_id)"></td>
-                                            </tr>
+                                        <tr>
+                                            @*<td>1</td>*@
+                                            <td>@session.tutor.fullname</td>
+                                            <td>@session.day_otw</td>
+                                            <td>@session.start_time - @session.end_time</td>
+                                            <td>@session.student.fullname</td>
+                                            <td>@session.tutor.specialized</td>
+                                            <td>@session.status.name</td>
+                                            @*<td>30</td>
+        <td>2</td>*@
+                                            @*<td><input  type="checkbox" class="checkbox-switch" name="check" id="slider-duyet" onchange="duyetstudent(@session.session_id)"></td>*@
+                                            <td>
+
+                                                <label class="switch">
+                                                    <input type="checkbox" name="check" id="slider-duyet" onchange="duyetstudent(@session.session_id)">
+                                                    <span class="slider round"></span>
+                                                </label>
+                                            </td>
+
+
+
+                                        </tr>
                                         }
 
                                     </tbody>
@@ -170,7 +181,7 @@
     <!-- Material Dashboard DEMO methods, don't include it in your project! -->
     <script src="~/Content/build/js/demo.js"></script>
     <script src="~/Content/build/js/switch.js"></script>
-
+    <script src="~/Content/build/js/TutorHomePage.component.js"></script>
     <script>
         $(document).ready(function () {
             $().ready(function () {

@@ -219,6 +219,7 @@
     <Content Include="Content\build\css\material-dashboard.css" />
     <Content Include="Content\build\css\style.css" />
     <Content Include="Content\build\css\switch.css" />
+    <Content Include="Content\build\css\TutorHomePage.component.css" />
     <Content Include="Content\build\img\apple-icon.png" />
     <Content Include="Content\build\img\bang-cap-3.jpg" />
     <Content Include="Content\build\img\bg-pricing.jpg" />
@@ -275,6 +276,7 @@
     <Content Include="Content\build\js\plugins\perfect-scrollbar.jquery.min.js" />
     <Content Include="Content\build\js\plugins\sweetalert2.js" />
     <Content Include="Content\build\js\switch.js" />
+    <Content Include="Content\build\js\TutorHomePage.component.js" />
     <Content Include="Content\img\apple-icon.png" />
     <Content Include="Content\img\bang-cap-3.jpg" />
     <Content Include="Content\img\bg-pricing.jpg" />

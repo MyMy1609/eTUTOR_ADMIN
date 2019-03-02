@@ -89,6 +89,16 @@ namespace eTUITOR.Controllers
             ViewBag.Message = "User.";
             return View();
         }
+
+        [HttpPost]
+        public ActionResult Duyetkhoahoc(int id)
+        {
+            int asd = id;
+            var se = model.sessions.Find(id);
+            se.status_admin = 1;
+            model.SaveChanges();
+            return RedirectToAction("Duyetkhoahoc");
+        }
     }
 }
         
