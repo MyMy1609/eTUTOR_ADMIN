@@ -16,7 +16,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Course Management</title>
-    <base href="../../../assets/">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
     @section css {
     <link href="~/Content/build/css/font-awesome.min.css" rel="stylesheet" />
@@ -104,7 +103,7 @@
                                             <td>@session.start_time - @session.end_time</td>
                                             <td>@session.student.fullname</td>
                                             <td>@session.tutor.specialized</td>
-                                            <td>@session.status.name</td>
+                                            <td>@session.status1.name</td>
                                             @*<td>30</td>
         <td>2</td>*@
                                             @*<td><input  type="checkbox" class="checkbox-switch" name="check" id="slider-duyet" onchange="duyetstudent(@session.session_id)"></td>*@

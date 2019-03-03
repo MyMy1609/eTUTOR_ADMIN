@@ -48,8 +48,8 @@ namespace eTUITOR.Controllers
         public ActionResult Course()
         {
             var tutor_id = int.Parse(Session["UserID"].ToString());
-            var info = model.tutors.FirstOrDefault(x => x.tutor_id == tutor_id);
-            List<session> sessionList = model.sessions.Where(x => x.tutor_id == tutor_id && x.status_tutor == 1 || x.status_admin == 2).ToList();
+            var info = model.tutors.FirstOrDefault();
+            List<session> sessionList = model.sessions.Where(x => x.status_tutor == 1 && x.status_admin == 2).ToList();
             ViewData["sessionlist"] = sessionList;
             return View(info);
         }
