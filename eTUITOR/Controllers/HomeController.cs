@@ -86,8 +86,8 @@ namespace eTUITOR.Controllers
 
         public ActionResult User()
         {
-            ViewBag.Message = "User.";
-            return View();
+            var tutor = model.tutors.Where(x => x.status == 2).ToList();
+            return View(tutor);
         }
 
         [HttpPost]
