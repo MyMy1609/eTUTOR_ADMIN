@@ -105,6 +105,11 @@ namespace eTUITOR.Controllers
             var contact = model.contact_admin.ToList();
             return View(contact);
         }
+
+        public ActionResult Blockuser()
+        {
+            return View();
+        }
     }
 }
         
