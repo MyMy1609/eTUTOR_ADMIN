@@ -1,7 +1,13 @@
-﻿
+﻿@using eTUITOR.Models;
+
+
 @{
     ViewBag.Title = "Blockuser";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    eTUTOREntities db = new eTUTOREntities();
+    var tutor = db.tutors.ToList(); //used in line 91-foreach
+    var parent = db.parents.ToList(); //used in line 159-foreach
+    var student = db.students.ToList(); //used in line 226-foreach
 }
 
 <!DOCTYPE html>
@@ -11,7 +17,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Block User Management</title>
+    <title>User Management</title>
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
 
     <link href="~/Content/build/css/font-awesome.min.css" rel="stylesheet" />
@@ -79,31 +85,35 @@
                                             <th>SĐT</th>
                                             <th>TRẠNG THÁI</th>
                                             <th>XEM CHI TIẾT</th>
-                                            <th>KHÓA TÀI KHOẢN</th>
+                                            <th>DUYỆT TÀI KHOẢN</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Trân Tiểu My</td>
-                                            <td>MyYeuAn@gmail.com</td>
-                                            <td>0931437267</td>
-                                            <td>Đã duyệt</td>
-                                            <td>
-                                                <a href="@Url.Action("detailstudent","Home")">
-                                                    <i class="material-icons">
-                                                        remove_red_eye
-                                                    </i>
-                                                </a>
+                                        @foreach (var item in tutor.Where(x => x.status == 1))
+                                        {
 
-                                            </td>
-                                            <td>
-                                                <label class="switch">
-                                                    <input type="checkbox" name="check">
-                                                    <span class="slider round"></span>
-                                                </label>
-                                            </td>
-                                        </tr>
 
+                                            <tr>
+                                                <td>@item.fullname</td>
+                                                <td>@item.email</td>
+                                                <td>@item.phone</td>
+                                                <td>@item.status1.name</td>
+                                                <td>
+                                                    <a href="@Url.Action("detailstudent", "Home")">
+                                                        <i class="material-icons">
+                                                            remove_red_eye
+                                                        </i>
+                                                    </a>
+
+                                                </td>
+                                                <td>
+                                                    <label class="switch">
+                                                        <input type="checkbox" name="check">
+                                                        <span class="slider round"></span>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                        }
                                     </tbody>
                                 </table>
                             </div>
@@ -142,32 +152,35 @@
                                             <th>SĐT</th>
                                             <th>TRẠNG THÁI</th>
                                             <th>XEM CHI TIẾT</th>
-                                            <th>KHÓA TÀI KHOẢN</th>
+                                            <th>DUYỆT TÀI KHOẢN</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Trân Tiểu My</td>
-                                            <td>MyYeuAn@gmail.com</td>
-                                            <td>0931437267</td>
-                                            <td>Đã duyệt</td>
-                                            <td>
-                                                <a href="@Url.Action("detailstudent","Home")">
-                                                    <i class="material-icons">
-                                                        remove_red_eye
-                                                    </i>
-                                                </a>
+                                        @foreach (var item in parent.Where(x => x.status == 1))
+                                        {
 
-                                            </td>
-                                            <td>
-                                                <label class="switch">
-                                                    <input type="checkbox" name="check">
-                                                    <span class="slider round"></span>
-                                                </label>
-                                            </td>
-                                        </tr>
 
+                                            <tr>
+                                                <td>@item.fullname</td>
+                                                <td>@item.email</td>
+                                                <td>@item.phone</td>
+                                                <td>@item.status</td>
+                                                <td>
+                                                    <a href="@Url.Action("detailstudent","Home")">
+                                                        <i class="material-icons">
+                                                            remove_red_eye
+                                                        </i>
+                                                    </a>
+
+                                                </td>
+                                                <td>
+                                                    <label class="switch">
+                                                        <input type="checkbox" name="check">
+                                                        <span class="slider round"></span>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                        }
                                     </tbody>
                                 </table>
                             </div>
@@ -206,31 +219,37 @@
                                             <th>SĐT</th>
                                             <th>TRẠNG THÁI</th>
                                             <th>XEM CHI TIẾT</th>
-                                            <th>KHÓA TÀI KHOẢN</th>
+                                            <th>DUYỆT TÀI KHOẢN</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Trân Tiểu My</td>
-                                            <td>MyYeuAn@gmail.com</td>
-                                            <td>0931437267</td>
-                                            <td>Đã duyệt</td>
-                                            <td>
-                                                <a href="@Url.Action("detailstudent","Home")">
-                                                    <i class="material-icons">
-                                                        remove_red_eye
-                                                    </i>
-                                                </a>
+                                        @foreach (var item in student.Where(x => x.status == 1))
+                                        {
 
-                                            </td>
-                                            <td>
-                                                <label class="switch">
-                                                    <input type="checkbox" name="check">
-                                                    <span class="slider round"></span>
-                                                </label>
-                                            </td>
-                                        </tr>
 
+                                            <tr>
+                                                <td>Trân Tiểu My</td>
+                                                <td>MyYeuAn@gmail.com</td>
+                                                <td>
+                                                    0931437267
+                                                </td>
+                                                <td>Đã duyệt</td>
+                                                <td>
+                                                    <a href="@Url.Action("detailstudent","Home")">
+                                                        <i class="material-icons">
+                                                            remove_red_eye
+                                                        </i>
+                                                    </a>
+
+                                                </td>
+                                                <td>
+                                                    <label class="switch">
+                                                        <input type="checkbox" name="check">
+                                                        <span class="slider round"></span>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                        }
                                     </tbody>
                                 </table>
                             </div>

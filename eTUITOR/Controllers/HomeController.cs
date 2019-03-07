@@ -90,6 +90,8 @@ namespace eTUITOR.Controllers
             return View(tutor);
         }
 
+
+
         [HttpPost]
         public ActionResult Duyetkhoahoc(int id)
         {
@@ -108,8 +110,11 @@ namespace eTUITOR.Controllers
 
         public ActionResult Blockuser()
         {
+            
             return View();
         }
+
+         
     }
 }
         
