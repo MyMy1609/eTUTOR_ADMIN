@@ -99,6 +99,12 @@ namespace eTUITOR.Controllers
             model.SaveChanges();
             return RedirectToAction("Duyetkhoahoc");
         }
+
+        public ActionResult Contact()
+        {
+            var contact = model.contact_admin.ToList();
+            return View(contact);
+        }
     }
 }
         
