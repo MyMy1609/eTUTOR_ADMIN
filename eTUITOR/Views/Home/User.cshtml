@@ -1,9 +1,12 @@
 ﻿@using eTUITOR.Models;
-@model IEnumerable<eTUITOR.Models.tutor>
+
 @{
     ViewBag.Title = "User";
     Layout = "~/Views/Shared/_Layout.cshtml";
     eTUTOREntities db = new eTUTOREntities();
+    var tutor = db.tutors.ToList(); //used in line 91-foreach
+    var parent = db.parents.ToList(); //used in line 159-foreach
+    var student = db.students.ToList(); //used in line 226-foreach
 }
 
 <!DOCTYPE html>
@@ -85,7 +88,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach (var item in Model)
+                                        @foreach (var item in tutor.Where(x => x.status == 2))
                                         {
 
 
@@ -103,8 +106,9 @@
 
                                                 </td>
                                                 <td>
+
                                                     <label class="switch">
-                                                        <input type="checkbox" name="check">
+                                                        <input type="checkbox" name="check" id="slider-duyet" onchange="duyettutor(@item.tutor_id)">
                                                         <span class="slider round"></span>
                                                     </label>
                                                 </td>
@@ -152,27 +156,31 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Trân Tiểu My</td>
-                                            <td>MyYeuAn@gmail.com</td>
-                                            <td>0931437267</td>
-                                            <td>Đã duyệt</td>
-                                            <td>
-                                                <a href="@Url.Action("detailstudent","Home")">
-                                                    <i class="material-icons">
-                                                        remove_red_eye
-                                                    </i>
-                                                </a>
+                                        @foreach (var item in parent.Where(x => x.status == 2))
+                                        {
 
-                                            </td>
-                                            <td>
-                                                <label class="switch">
-                                                    <input type="checkbox" name="check">
-                                                    <span class="slider round"></span>
-                                                </label>
-                                            </td>
-                                        </tr>
 
+                                            <tr>
+                                                <td>@item.fullname</td>
+                                                <td>@item.email</td>
+                                                <td>@item.phone</td>
+                                                <td>@item.status1.name</td>
+                                                <td>
+                                                    <a href="@Url.Action("detailstudent","Home")">
+                                                        <i class="material-icons">
+                                                            remove_red_eye
+                                                        </i>
+                                                    </a>
+
+                                                </td>
+                                                <td>
+                                                    <label class="switch">
+                                                        <input type="checkbox" name="check" id="slider-duyet" onchange="duyetparent(@item.parent_id)">
+                                                        <span class="slider round"></span>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                        }
                                     </tbody>
                                 </table>
                             </div>
@@ -215,13 +223,15 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach (var item in student.Where(x => x.status == 2))
+                                        {
+
+
                                         <tr>
-                                            <td>Trân Tiểu My</td>
-                                            <td>MyYeuAn@gmail.com</td>
-                                            <td>
-                                                0931437267
-                                            </td>
-                                            <td>Đã duyệt</td>
+                                            <td>@item.fullname</td>
+                                            <td>@item.email</td>
+                                            <td>@item.phone</td>
+                                            <td>@item.status</td>
                                             <td>
                                                 <a href="@Url.Action("detailstudent","Home")">
                                                     <i class="material-icons">
@@ -232,12 +242,12 @@
                                             </td>
                                             <td>
                                                 <label class="switch">
-                                                    <input type="checkbox" name="check">
+                                                    <input type="checkbox" name="check" id="slider-duyet" onchange="duyetstudent(@item.student_id)">
                                                     <span class="slider round"></span>
                                                 </label>
                                             </td>
                                         </tr>
-
+                                        }
                                     </tbody>
                                 </table>
                             </div>

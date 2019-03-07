@@ -44,6 +44,7 @@
     <EntitySetMapping Name="comments">
       <EntityTypeMapping TypeName="capstone2019Model.comment">
         <MappingFragment StoreEntitySet="comments">
+          <ScalarProperty Name="dateTimeCmt" ColumnName="dateTimeCmt" />
           <ScalarProperty Name="tutor_id" ColumnName="tutor_id" />
           <ScalarProperty Name="content" ColumnName="content" />
           <ScalarProperty Name="student_id" ColumnName="student_id" />
@@ -64,6 +65,7 @@
     <EntitySetMapping Name="contact_admin">
       <EntityTypeMapping TypeName="capstone2019Model.contact_admin">
         <MappingFragment StoreEntitySet="contact_admin">
+          <ScalarProperty Name="dateTimeCt" ColumnName="dateTimeCt" />
           <ScalarProperty Name="content" ColumnName="content" />
           <ScalarProperty Name="title" ColumnName="title" />
           <ScalarProperty Name="email" ColumnName="email" />
@@ -76,6 +78,7 @@
     <EntitySetMapping Name="contact_tutor">
       <EntityTypeMapping TypeName="capstone2019Model.contact_tutor">
         <MappingFragment StoreEntitySet="contact_tutor">
+          <ScalarProperty Name="dateTimeCt" ColumnName="dateTimeCt" />
           <ScalarProperty Name="tutor_id" ColumnName="tutor_id" />
           <ScalarProperty Name="content" ColumnName="content" />
           <ScalarProperty Name="title" ColumnName="title" />
@@ -88,6 +91,7 @@
     <EntitySetMapping Name="contacts">
       <EntityTypeMapping TypeName="capstone2019Model.contact">
         <MappingFragment StoreEntitySet="contacts">
+          <ScalarProperty Name="dateTimeCt" ColumnName="dateTimeCt" />
           <ScalarProperty Name="content" ColumnName="content" />
           <ScalarProperty Name="phone" ColumnName="phone" />
           <ScalarProperty Name="email" ColumnName="email" />
@@ -115,6 +119,7 @@
     <EntitySetMapping Name="parents">
       <EntityTypeMapping TypeName="capstone2019Model.parent">
         <MappingFragment StoreEntitySet="parents">
+          <ScalarProperty Name="dateRegist" ColumnName="dateRegist" />
           <ScalarProperty Name="avatar" ColumnName="avatar" />
           <ScalarProperty Name="status" ColumnName="status" />
           <ScalarProperty Name="birthday" ColumnName="birthday" />
@@ -131,6 +136,7 @@
     <EntitySetMapping Name="schedules">
       <EntityTypeMapping TypeName="capstone2019Model.schedule">
         <MappingFragment StoreEntitySet="schedules">
+          <ScalarProperty Name="dateCreate" ColumnName="dateCreate" />
           <ScalarProperty Name="tutor_id" ColumnName="tutor_id" />
           <ScalarProperty Name="status" ColumnName="status" />
           <ScalarProperty Name="note" ColumnName="note" />
@@ -144,6 +150,7 @@
     <EntitySetMapping Name="sessions">
       <EntityTypeMapping TypeName="capstone2019Model.session">
         <MappingFragment StoreEntitySet="sessions">
+          <ScalarProperty Name="dateCreate" ColumnName="dateCreate" />
           <ScalarProperty Name="subject_id" ColumnName="subject_id" />
           <ScalarProperty Name="status_admin" ColumnName="status_admin" />
           <ScalarProperty Name="status_tutor" ColumnName="status_tutor" />
@@ -170,6 +177,7 @@
     <EntitySetMapping Name="students">
       <EntityTypeMapping TypeName="capstone2019Model.student">
         <MappingFragment StoreEntitySet="students">
+          <ScalarProperty Name="dateCreate" ColumnName="dateCreate" />
           <ScalarProperty Name="birthday" ColumnName="birthday" />
           <ScalarProperty Name="phone" ColumnName="phone" />
           <ScalarProperty Name="avatar" ColumnName="avatar" />
@@ -196,6 +204,8 @@
     <EntitySetMapping Name="tutors">
       <EntityTypeMapping TypeName="capstone2019Model.tutor">
         <MappingFragment StoreEntitySet="tutors">
+          <ScalarProperty Name="dateCreate" ColumnName="dateCreate" />
+          <ScalarProperty Name="status_register" ColumnName="status_register" />
           <ScalarProperty Name="avatar" ColumnName="avatar" />
           <ScalarProperty Name="status" ColumnName="status" />
           <ScalarProperty Name="certificate" ColumnName="certificate" />
@@ -228,6 +238,16 @@
           <ScalarProperty Name="us_pw" ColumnName="us_pw" />
           <ScalarProperty Name="us_usname" ColumnName="us_usname" />
           <ScalarProperty Name="us_id" ColumnName="us_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="notices">
+      <EntityTypeMapping TypeName="capstone2019Model.notice">
+        <MappingFragment StoreEntitySet="notice">
+          <ScalarProperty Name="dateCreate" ColumnName="dateCreate" />
+          <ScalarProperty Name="recive" ColumnName="recive" />
+          <ScalarProperty Name="content" ColumnName="content" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

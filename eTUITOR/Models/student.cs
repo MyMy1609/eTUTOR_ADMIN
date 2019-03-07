@@ -33,6 +33,7 @@ namespace eTUITOR.Models
         public string avatar { get; set; }
         public string phone { get; set; }
         public Nullable<System.DateTime> birthday { get; set; }
+        public Nullable<System.DateTime> dateCreate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<comment> comments { get; set; }

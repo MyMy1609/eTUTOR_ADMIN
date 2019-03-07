@@ -86,8 +86,7 @@ namespace eTUITOR.Controllers
 
         public ActionResult User()
         {
-            var tutor = model.tutors.Where(x => x.status == 2).ToList();
-            return View(tutor);
+            return View();
         }
 
 
@@ -114,7 +113,35 @@ namespace eTUITOR.Controllers
             return View();
         }
 
-         
+        [HttpPost]
+        public ActionResult Duyettutor(int id)
+        {
+            int asd = id;
+            var se = model.tutors.Find(id);
+            se.status = 1;
+            model.SaveChanges();
+            return RedirectToAction("Duyettutor");
+        }
+
+        [HttpPost]
+        public ActionResult Duyetparent(int id)
+        {
+            int asd = id;
+            var se = model.parents.Find(id);
+            se.status = 1;
+            model.SaveChanges();
+            return RedirectToAction("Duyetparent");
+        }
+
+        [HttpPost]
+        public ActionResult Duyetstudent(int id)
+        {
+            int asd = id;
+            var se = model.students.Find(id);
+            se.status = 1;
+            model.SaveChanges();
+            return RedirectToAction("Duyetstudent");
+        }
     }
 }
         
