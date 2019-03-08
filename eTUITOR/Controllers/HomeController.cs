@@ -142,6 +142,61 @@ namespace eTUITOR.Controllers
             model.SaveChanges();
             return RedirectToAction("Duyetstudent");
         }
+
+        //khoa
+        [HttpPost]
+        public ActionResult Khoatutor(int id)
+        {
+            int asd = id;
+            var se = model.tutors.Find(id);
+            if (se.status ==1)
+            {
+                se.status = 3;
+                model.SaveChanges();
+            }
+            else if (se.status ==3)
+            {
+                se.status = 1;
+                model.SaveChanges();
+            }                     
+            return RedirectToAction("Khoatutor");
+        }
+
+        [HttpPost]
+        public ActionResult Khoaparent(int id)
+        {
+            int asd = id;
+            var se = model.parents.Find(id);
+            if (se.status == 1)
+            {
+                se.status = 3;
+                model.SaveChanges();
+            }
+            else if (se.status == 3)
+            {
+                se.status = 1;
+                model.SaveChanges();
+            }
+            return RedirectToAction("Khoaparent");
+        }
+
+        [HttpPost]
+        public ActionResult Khoastudent(int id)
+        {
+            int asd = id;
+            var se = model.students.Find(id);
+            if (se.status == 1)
+            {
+                se.status = 3;
+                model.SaveChanges();
+            }
+            else if (se.status == 3)
+            {
+                se.status = 1;
+                model.SaveChanges();
+            }
+            return RedirectToAction("Khoastudent");
+        }
     }
 }
         

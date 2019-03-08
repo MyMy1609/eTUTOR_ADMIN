@@ -85,11 +85,11 @@
                                             <th>SĐT</th>
                                             <th>TRẠNG THÁI</th>
                                             <th>XEM CHI TIẾT</th>
-                                            <th>DUYỆT TÀI KHOẢN</th>
+                                            <th>KHÓA TÀI KHOẢN</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach (var item in tutor.Where(x => x.status == 1))
+                                        @foreach (var item in tutor.Where(x => x.status == 1 || x.status ==3))
                                         {
 
 
@@ -108,7 +108,7 @@
                                                 </td>
                                                 <td>
                                                     <label class="switch">
-                                                        <input type="checkbox" name="check">
+                                                        <input type="checkbox" name="check" id="slider-khoa" onchange="khoatutor(@item.tutor_id)">
                                                         <span class="slider round"></span>
                                                     </label>
                                                 </td>
@@ -152,11 +152,11 @@
                                             <th>SĐT</th>
                                             <th>TRẠNG THÁI</th>
                                             <th>XEM CHI TIẾT</th>
-                                            <th>DUYỆT TÀI KHOẢN</th>
+                                            <th>KHÓA TÀI KHOẢN</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach (var item in parent.Where(x => x.status == 1))
+                                        @foreach (var item in parent.Where(x => x.status == 1 || x.status == 3))
                                         {
 
 
@@ -164,7 +164,7 @@
                                                 <td>@item.fullname</td>
                                                 <td>@item.email</td>
                                                 <td>@item.phone</td>
-                                                <td>@item.status</td>
+                                                <td>@item.status1.name</td>
                                                 <td>
                                                     <a href="@Url.Action("detailstudent","Home")">
                                                         <i class="material-icons">
@@ -175,7 +175,7 @@
                                                 </td>
                                                 <td>
                                                     <label class="switch">
-                                                        <input type="checkbox" name="check">
+                                                        <input type="checkbox" name="check" onchange="khoaparent(@item.parent_id)">
                                                         <span class="slider round"></span>
                                                     </label>
                                                 </td>
@@ -219,21 +219,21 @@
                                             <th>SĐT</th>
                                             <th>TRẠNG THÁI</th>
                                             <th>XEM CHI TIẾT</th>
-                                            <th>DUYỆT TÀI KHOẢN</th>
+                                            <th>KHÓA TÀI KHOẢN</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach (var item in student.Where(x => x.status == 1))
+                                        @foreach (var item in student.Where(x => x.status == 1 || x.status == 3))
                                         {
 
 
                                             <tr>
-                                                <td>Trân Tiểu My</td>
-                                                <td>MyYeuAn@gmail.com</td>
+                                                <td>@item.fullname</td>
+                                                <td>@item.email</td>
                                                 <td>
-                                                    0931437267
+                                                    @item.phone
                                                 </td>
-                                                <td>Đã duyệt</td>
+                                                <td>@item.status</td>
                                                 <td>
                                                     <a href="@Url.Action("detailstudent","Home")">
                                                         <i class="material-icons">
@@ -244,7 +244,7 @@
                                                 </td>
                                                 <td>
                                                     <label class="switch">
-                                                        <input type="checkbox" name="check">
+                                                        <input type="checkbox" name="check" onchange="khoastudent(@item.student_id)">
                                                         <span class="slider round"></span>
                                                     </label>
                                                 </td>
