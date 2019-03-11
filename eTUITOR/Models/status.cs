@@ -23,6 +23,7 @@ namespace eTUITOR.Models
             this.sessions1 = new HashSet<session>();
             this.sessions2 = new HashSet<session>();
             this.tutors = new HashSet<tutor>();
+            this.tutors1 = new HashSet<tutor>();
         }
     
         public int status_id { get; set; }
@@ -40,5 +41,7 @@ namespace eTUITOR.Models
         public virtual ICollection<session> sessions2 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tutor> tutors { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tutor> tutors1 { get; set; }
     }
 }

@@ -39,6 +39,8 @@ namespace eTUITOR.Models
         public string certificate { get; set; }
         public Nullable<int> status { get; set; }
         public string avatar { get; set; }
+        public Nullable<int> status_register { get; set; }
+        public Nullable<System.DateTime> dateCreate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<comment> comments { get; set; }
@@ -53,5 +55,6 @@ namespace eTUITOR.Models
         public virtual status status1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<subject> subjects { get; set; }
+        public virtual status status2 { get; set; }
     }
 }
