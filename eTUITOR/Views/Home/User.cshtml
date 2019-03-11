@@ -1,7 +1,12 @@
-﻿
+﻿@using eTUITOR.Models;
+
 @{
     ViewBag.Title = "User";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    eTUTOREntities db = new eTUTOREntities();
+    var tutor = db.tutors.ToList(); //used in line 91-foreach
+    var parent = db.parents.ToList(); //used in line 159-foreach
+    var student = db.students.ToList(); //used in line 226-foreach
 }
 
 <!DOCTYPE html>
@@ -22,6 +27,7 @@
     <!-- Google Tag Manager -->
     <link href="~/Content/build/css/switch.css" rel="stylesheet" />
     <link href="~/Content/vendor/lightbox2/dist/css/lightbox.min.css" rel="stylesheet" />
+    <link href="~/Content/build/css/TutorHomePage.component.css" rel="stylesheet" />
     <script>
         (function (w, d, s, l, i) {
             w[l] = w[l] || [];
@@ -62,7 +68,7 @@
                             <div class="card-icon">
                                 <i class="material-icons">assignment</i>
                             </div>
-                            <h4 class="card-title">Danh sách người dùng</h4>
+                            <h4 class="card-title">Danh sách tài khoản tutor</h4>
                         </div>
                         <div class="card-body">
                             <div class="toolbar">
@@ -73,24 +79,159 @@
                                        cellspacing="0" width="100%" style="width:100%">
                                     <thead>
                                         <tr>
-                                            <th style="width: 50px;">ID</th>
                                             <th>HỌ VÀ TÊN</th>
                                             <th>EMAIL</th>
                                             <th>SĐT</th>
-                                            <th>VAI TRÒ</th>
                                             <th>TRẠNG THÁI</th>
                                             <th>XEM CHI TIẾT</th>
-                                            <th>ĐỔI TRẠNG THÁI</th>
+                                            <th>DUYỆT TÀI KHOẢN</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach (var item in tutor.Where(x => x.status == 2))
+                                        {
+
+
+                                            <tr>
+                                                <td>@item.fullname</td>
+                                                <td>@item.email</td>
+                                                <td>@item.phone</td>
+                                                <td>@item.status1.name</td>
+                                                <td>
+                                                    <a href="@Url.Action("detailstudent", "Home")">
+                                                        <i class="material-icons">
+                                                            remove_red_eye
+                                                        </i>
+                                                    </a>
+
+                                                </td>
+                                                <td>
+
+                                                    <label class="switch">
+                                                        <input type="checkbox" name="check" id="slider-duyet" onchange="duyettutor(@item.tutor_id)">
+                                                        <span class="slider round"></span>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- end content-->
+                    </div>
+                    <!--  end card  -->
+                </div>
+                <!-- end col-md-12 -->
+            </div>
+            <!-- end row -->
+        </div>
+    </div>
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header card-header-primary card-header-icon">
+                            <div class="card-icon">
+                                <i class="material-icons">assignment</i>
+                            </div>
+                            <h4 class="card-title">Danh sách tài khoản parent</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="toolbar">
+                                <!--        Here you can write extra buttons/actions for the toolbar              -->
+                            </div>
+                            <div class="material-datatables">
+                                <table id="datatables1" class="table table-striped table-no-bordered table-hover"
+                                       cellspacing="0" width="100%" style="width:100%">
+                                    <thead>
                                         <tr>
-                                            <td>1</td>
-                                            <td>Trân Tiểu My</td>
-                                            <td>MyYeuAn@gmail.com</td>
-                                            <td>0931437267</td>
-                                            <td>Người học</td>
-                                            <td>Đã duyệt</td>
+                                            <th>HỌ VÀ TÊN</th>
+                                            <th>EMAIL</th>
+                                            <th>SĐT</th>
+                                            <th>TRẠNG THÁI</th>
+                                            <th>XEM CHI TIẾT</th>
+                                            <th>DUYỆT TÀI KHOẢN</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in parent.Where(x => x.status == 2))
+                                        {
+
+
+                                            <tr>
+                                                <td>@item.fullname</td>
+                                                <td>@item.email</td>
+                                                <td>@item.phone</td>
+                                                <td>@item.status1.name</td>
+                                                <td>
+                                                    <a href="@Url.Action("detailstudent","Home")">
+                                                        <i class="material-icons">
+                                                            remove_red_eye
+                                                        </i>
+                                                    </a>
+
+                                                </td>
+                                                <td>
+                                                    <label class="switch">
+                                                        <input type="checkbox" name="check" id="slider-duyet" onchange="duyetparent(@item.parent_id)">
+                                                        <span class="slider round"></span>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- end content-->
+                    </div>
+                    <!--  end card  -->
+                </div>
+                <!-- end col-md-12 -->
+            </div>
+            <!-- end row -->
+        </div>
+    </div>
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header card-header-primary card-header-icon">
+                            <div class="card-icon">
+                                <i class="material-icons">assignment</i>
+                            </div>
+                            <h4 class="card-title">Danh sách tài khoản student</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="toolbar">
+                                <!--        Here you can write extra buttons/actions for the toolbar              -->
+                            </div>
+                            <div class="material-datatables">
+                                <table id="datatables2" class="table table-striped table-no-bordered table-hover"
+                                       cellspacing="0" width="100%" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>HỌ VÀ TÊN</th>
+                                            <th>EMAIL</th>
+                                            <th>SĐT</th>
+                                            <th>TRẠNG THÁI</th>
+                                            <th>XEM CHI TIẾT</th>
+                                            <th>DUYỆT TÀI KHOẢN</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in student.Where(x => x.status == 2))
+                                        {
+
+
+                                        <tr>
+                                            <td>@item.fullname</td>
+                                            <td>@item.email</td>
+                                            <td>@item.phone</td>
+                                            <td>@item.status</td>
                                             <td>
                                                 <a href="@Url.Action("detailstudent","Home")">
                                                     <i class="material-icons">
@@ -100,28 +241,13 @@
 
                                             </td>
                                             <td>
-                                                <input type="checkbox" class="checkbox-switch" />
+                                                <label class="switch">
+                                                    <input type="checkbox" name="check" id="slider-duyet" onchange="duyetstudent(@item.student_id)">
+                                                    <span class="slider round"></span>
+                                                </label>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Nguyễn Đình Quốc An</td>
-                                            <td>AnYeuMy@gmail.com</td>
-                                            <td>0931437267</td>
-                                            <td>Người dạy</td>
-                                            <td>Đã duyệt</td>
-                                            <td>
-                                                <a href="@Url.Action("detailparent","Home")">
-                                                    <i class="material-icons">
-                                                        remove_red_eye
-                                                    </i>
-                                                </a>
-
-                                            </td>
-                                            <td>
-                                                <input type="checkbox" class="checkbox-switch" />
-                                            </td>
-                                        </tr>
+                                        }
                                     </tbody>
                                 </table>
                             </div>
@@ -292,6 +418,7 @@
     <!-- Material Dashboard DEMO methods, don't include it in your project! -->
     <script src="~/Content/build/js/demo.js"></script>
     <script src="~/Content/build/js/switch.js"></script>
+    <script src="~/Content/build/js/TutorHomePage.component.js"></script>
     <script>
         $(document).ready(function () {
             $().ready(function () {
@@ -580,11 +707,59 @@
                     searchPlaceholder: "Search records",
                 }
             });
+            //datatables1
+
+            $('#datatables1').DataTable({
+                "pagingType": "full_numbers",
+                "lengthMenu": [
+                    [10, 25, 50, -1],
+                    [10, 25, 50, "All"]
+                ],
+                responsive: true,
+                language: {
+                    search: "_INPUT_",
+                    searchPlaceholder: "Search records",
+                }
+
+            });
+
+            //datatables2
+
+            $('#datatables2').DataTable({
+                "pagingType": "full_numbers",
+                "lengthMenu": [
+                    [10, 25, 50, -1],
+                    [10, 25, 50, "All"]
+                ],
+                responsive: true,
+                language: {
+                    search: "_INPUT_",
+                    searchPlaceholder: "Search records",
+                }
+
+            });
 
             var table = $('#datatable').DataTable();
-
+            //datatables1
+            var table1 = $('#datatable1').DataTable();
+            //datatables2
+            var table2 = $('#datatable2').DataTable();
             // Edit record
             table.on('click', '.edit', function () {
+                $tr = $(this).closest('tr');
+                var data = table.row($tr).data();
+                alert('You press on Row: ' + data[0] + ' ' + data[1] + ' ' + data[2] + '\'s row.');
+            });
+
+            // Edit record 1
+            table1.on('click', '.edit', function () {
+                $tr = $(this).closest('tr');
+                var data = table.row($tr).data();
+                alert('You press on Row: ' + data[0] + ' ' + data[1] + ' ' + data[2] + '\'s row.');
+            });
+
+            // Edit record 2
+            table2.on('click', '.edit', function () {
                 $tr = $(this).closest('tr');
                 var data = table.row($tr).data();
                 alert('You press on Row: ' + data[0] + ' ' + data[1] + ' ' + data[2] + '\'s row.');
@@ -597,10 +772,35 @@
                 e.preventDefault();
             });
 
+            // Delete a record 1
+            table1.on('click', '.remove', function (e) {
+                $tr = $(this).closest('tr');
+                table1.row($tr).remove().draw();
+                e.preventDefault();
+            });
+
+            // Delete a record 2
+            table2.on('click', '.remove', function (e) {
+                $tr = $(this).closest('tr');
+                table2.row($tr).remove().draw();
+                e.preventDefault();
+            });
+
             //Like record
             table.on('click', '.like', function () {
                 alert('You clicked on Like button');
             });
+
+            //Like record 1
+            table1.on('click', '.like', function () {
+                alert('You clicked on Like button');
+            });
+
+            //Like record 2
+            table2.on('click', '.like', function () {
+                alert('You clicked on Like button');
+            });
+
             let el = $('.checkbox-switch');
             let switchArr = [];
             el.each(function (index, e) {
@@ -613,6 +813,8 @@
                     offText: 'D'
                 });
             })
+
+
         });
     </script>
 </body>

@@ -26,6 +26,7 @@
     <Property Name="student_id" Type="int" />
     <Property Name="content" Type="nvarchar(max)" />
     <Property Name="tutor_id" Type="int" />
+    <Property Name="dateTimeCmt" Type="datetime" />
   </EntityType>
   <EntityType Name="common">
     <Key>
@@ -46,6 +47,7 @@
     <Property Name="email" Type="nvarchar" MaxLength="30" />
     <Property Name="title" Type="nvarchar" MaxLength="30" />
     <Property Name="content" Type="nvarchar" MaxLength="255" />
+    <Property Name="dateTimeCt" Type="datetime" />
   </EntityType>
   <EntityType Name="contact_tutor">
     <Key>
@@ -57,6 +59,7 @@
     <Property Name="title" Type="nvarchar" MaxLength="30" />
     <Property Name="content" Type="nvarchar" MaxLength="255" />
     <Property Name="tutor_id" Type="int" />
+    <Property Name="dateTimeCt" Type="datetime" />
   </EntityType>
   <EntityType Name="contacts">
     <Key>
@@ -67,6 +70,7 @@
     <Property Name="email" Type="nvarchar" MaxLength="20" />
     <Property Name="phone" Type="nvarchar" MaxLength="15" />
     <Property Name="content" Type="nvarchar(max)" />
+    <Property Name="dateTimeCt" Type="datetime" />
   </EntityType>
   <EntityType Name="history_lessons">
     <Key>
@@ -83,6 +87,19 @@
     <Property Name="day_otw" Type="nvarchar" MaxLength="50" />
     <Property Name="day" Type="datetime" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'capstone2019.dbo.notice' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="notice">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="content" />
+      <PropertyRef Name="recive" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="content" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="recive" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="dateCreate" Type="date" />
+  </EntityType>
   <EntityType Name="parents">
     <Key>
       <PropertyRef Name="parent_id" />
@@ -97,6 +114,7 @@
     <Property Name="birthday" Type="date" />
     <Property Name="status" Type="int" />
     <Property Name="avatar" Type="nvarchar" MaxLength="255" />
+    <Property Name="dateRegist" Type="date" />
   </EntityType>
   <EntityType Name="schedules">
     <Key>
@@ -109,6 +127,7 @@
     <Property Name="note" Type="nvarchar(max)" />
     <Property Name="status" Type="int" />
     <Property Name="tutor_id" Type="int" />
+    <Property Name="dateCreate" Type="date" />
   </EntityType>
   <EntityType Name="sessions">
     <Key>
@@ -126,6 +145,7 @@
     <Property Name="status_tutor" Type="int" />
     <Property Name="status_admin" Type="int" />
     <Property Name="subject_id" Type="int" />
+    <Property Name="dateCreate" Type="date" />
   </EntityType>
   <EntityType Name="status">
     <Key>
@@ -149,6 +169,7 @@
     <Property Name="avatar" Type="nvarchar" MaxLength="255" />
     <Property Name="phone" Type="nvarchar" MaxLength="15" />
     <Property Name="birthday" Type="date" />
+    <Property Name="dateCreate" Type="date" />
   </EntityType>
   <EntityType Name="subject">
     <Key>
@@ -194,6 +215,8 @@
     <Property Name="certificate" Type="nvarchar" MaxLength="100" />
     <Property Name="status" Type="int" />
     <Property Name="avatar" Type="nvarchar" MaxLength="255" />
+    <Property Name="status_register" Type="int" />
+    <Property Name="dateCreate" Type="date" />
   </EntityType>
   <EntityType Name="typeUser">
     <Key>
@@ -439,6 +462,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_tutor_status_register">
+    <End Role="status" Type="Self.status" Multiplicity="0..1" />
+    <End Role="tutors" Type="Self.tutors" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="status">
+        <PropertyRef Name="status_id" />
+      </Principal>
+      <Dependent Role="tutors">
+        <PropertyRef Name="status_register" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="capstone2019ModelStoreContainer">
     <EntitySet Name="about" EntityType="Self.about" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="admin" EntityType="Self.admin" Schema="dbo" store:Type="Tables" />
@@ -459,6 +494,14 @@
     <EntitySet Name="tutors" EntityType="Self.tutors" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="typeUser" EntityType="Self.typeUser" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="notice" EntityType="Self.notice" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [notice].[id] AS [id], 
+    [notice].[content] AS [content], 
+    [notice].[recive] AS [recive], 
+    [notice].[dateCreate] AS [dateCreate]
+    FROM [dbo].[notice] AS [notice]</DefiningQuery>
+    </EntitySet>
     <AssociationSet Name="FK__sessions__subjec__1BC821DD" Association="Self.FK__sessions__subjec__1BC821DD">
       <End Role="subject" EntitySet="subject" />
       <End Role="sessions" EntitySet="sessions" />
@@ -532,6 +575,10 @@
       <End Role="submenu" EntitySet="submenu" />
     </AssociationSet>
     <AssociationSet Name="FK_tutor_status" Association="Self.FK_tutor_status">
+      <End Role="status" EntitySet="status" />
+      <End Role="tutors" EntitySet="tutors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tutor_status_register" Association="Self.FK_tutor_status_register">
       <End Role="status" EntitySet="status" />
       <End Role="tutors" EntitySet="tutors" />
     </AssociationSet>

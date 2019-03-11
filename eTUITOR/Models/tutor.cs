@@ -53,6 +53,7 @@ namespace eTUITOR.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<session> sessions { get; set; }
         public virtual status status1 { get; set; }
+        public virtual status status2 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<subject> subjects { get; set; }
         public virtual status status2 { get; set; }

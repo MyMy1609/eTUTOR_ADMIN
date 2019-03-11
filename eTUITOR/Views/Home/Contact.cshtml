@@ -1,11 +1,10 @@
-﻿@model eTUITOR.Models.tutor
+﻿@model IEnumerable<eTUITOR.Models.contact_admin>
 @using eTUITOR.Models;
 
 @{
     ViewBag.Title = "Course Management";
     Layout = "~/Views/Shared/_Layout.cshtml";
     eTUTOREntities db = new eTUTOREntities();
-    var sessionlist = ViewData["sessionlist"] as List<eTUITOR.Models.session>;
 }
 
 <!DOCTYPE html>
@@ -15,19 +14,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Course Management</title>
+    <title>Contact</title>
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
     @section css {
-    <link href="~/Content/build/css/font-awesome.min.css" rel="stylesheet" />
-    <!-- CSS Files -->
-    <link href="~/Content/build/css/material-dashboard.css" rel="stylesheet" />
-    <!-- CSS Just for demo purpose, don't include it in your project -->
-    <link href="~/Content/build/css/demo.css" rel="stylesheet" />
-    <!-- Google Tag Manager -->
-    <link href="~/Content/build/css/switch.css" rel="stylesheet" />
-    <link href="~/Content/vendor/lightbox2/dist/css/lightbox.min.css" rel="stylesheet" />
-    <link href="~/Content/build/css/TutorHomePage.component.css" rel="stylesheet" />
-        }
+        <link href="~/Content/build/css/font-awesome.min.css" rel="stylesheet" />
+        <!-- CSS Files -->
+        <link href="~/Content/build/css/material-dashboard.css" rel="stylesheet" />
+        <!-- CSS Just for demo purpose, don't include it in your project -->
+        <link href="~/Content/build/css/demo.css" rel="stylesheet" />
+        <!-- Google Tag Manager -->
+        <link href="~/Content/build/css/switch.css" rel="stylesheet" />
+        <link href="~/Content/vendor/lightbox2/dist/css/lightbox.min.css" rel="stylesheet" />
+        <link href="~/Content/build/css/TutorHomePage.component.css" rel="stylesheet" />
+    }
     <script>
         (function (w, d, s, l, i) {
             w[l] = w[l] || [];
@@ -68,7 +67,7 @@
                             <div class="card-icon">
                                 <i class="material-icons">assignment</i>
                             </div>
-                            <h4 class="card-title">Danh sách buổi học</h4>
+                            <h4 class="card-title">Danh sách liên hệ</h4>
                         </div>
                         <div class="card-body">
                             <div class="toolbar">
@@ -78,48 +77,28 @@
                                 <table id="datatables" class="table table-striped table-no-bordered table-hover"
                                        cellspacing="0" width="100%" style="width:100%">
                                     <thead>
+                                        
                                         <tr>
-                                            @*<th style="width: 50px;">ID</th>*@
-                                            <th>TÊN GIA SƯ</th>
-                                            <th>THỨ</th>
-                                            <th>THỜI GIAN</th>
-                                            <th>HỌC SINH</th>
-                                            <th>MÔN HỌC</th>
-                                            @*<th style="width: 60px">LỚP</th>*@
-                                            @*<th>BUỔI ĐANG HỌC</th>
-                                            <th>BUỔI ĐÃ HỌC</th>*@
-                                            <th>TRẠNG THÁI</th>
-                                            <th>DUYỆT</th>
-
+                                            <th style="width: 50px;">ID</th>
+                                            <th>HỌ VÀ TÊN</th>
+                                            <th>SỐ ĐIỆN THOẠI</th>
+                                            <th>EMAIL</th>
+                                            <th>TITLE</th>
+                                            <th>CONTENT</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach (var session in sessionlist)
+                                        @foreach (var item in Model)
                                         {
-                                        <tr>
-                                            @*<td>1</td>*@
-                                            <td>@session.tutor.fullname</td>
-                                            <td>@session.day_otw</td>
-                                            <td>@session.start_time - @session.end_time</td>
-                                            <td>@session.student.fullname</td>
-                                            <td>@session.tutor.specialized</td>
-                                            <td>@session.status1.name</td>
-                                            @*<td>30</td>
-        <td>2</td>*@
-                                            @*<td><input  type="checkbox" class="checkbox-switch" name="check" id="slider-duyet" onchange="duyetstudent(@session.session_id)"></td>*@
-                                            <td>
-
-                                                <label class="switch">
-                                                    <input type="checkbox" name="check" id="slider-duyet" onchange="duyetkhoahoc(@session.session_id)">
-                                                    <span class="slider round"></span>
-                                                </label>
-                                            </td>
-
-
-
-                                        </tr>
+                                            <tr>
+                                                <td>@item.id</td>
+                                                <td>@item.fullname</td>
+                                                <td>@item.phone</td>
+                                                <td>@item.email</td>
+                                                <td>@item.title</td>
+                                                <td>@item.content</td>
+                                            </tr>
                                         }
-
                                     </tbody>
                                 </table>
                             </div>
@@ -146,13 +125,13 @@
     <script src="~/Content/build/js/plugins/jquery.validate.min.js"></script>
     <!-- Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
     <script src="~/Content/build/js/plugins/jquery.bootstrap-wizard.js"></script>
-    <!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
+    <!--    Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
     <script src="~/Content/build/js/plugins/bootstrap-selectpicker.js"></script>
     <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
     <script src="~/Content/build/js/plugins/bootstrap-datetimepicker.min.js"></script>
     <!--  DataTables.net Plugin, full documentation here: https://datatables.net/  -->
     <script src="~/Content/build/js/plugins/jquery.dataTables.min.js"></script>
-    <!--	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
+    <!--    Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
     <script src="~/Content/build/js/plugins/bootstrap-tagsinput.js"></script>
     <!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
     <script src="~/Content/build/js/plugins/jasny-bootstrap.min.js"></script>
@@ -192,27 +171,27 @@
 
                 $sidebar_responsive = $('body > .navbar-collapse');
 
-                window_width = $(window).width();
+                                                                                                            window_width = $(window).width();
 
-                fixed_plugin_open = $('.sidebar .sidebar-wrapper .nav li.active a p').html();
+                                                                                                            fixed_plugin_open = $('.sidebar .sidebar-wrapper .nav li.active a p').html();
 
-                if (window_width > 767 && fixed_plugin_open == 'Dashboard') {
-                    if ($('.fixed-plugin .dropdown').hasClass('show-dropdown')) {
+                                                                                                            if (window_width > 767 && fixed_plugin_open == 'Dashboard') {
+                                                                                                                if ($('.fixed-plugin .dropdown').hasClass('show-dropdown')) {
                         $('.fixed-plugin .dropdown').addClass('open');
-                    }
+                                                    }
 
-                }
+                                                }
 
                 $('.fixed-plugin a').click(function (event) {
-                    // Alex if we click on switch, stop propagation of the event, so the dropdown will not be hide, otherwise we set the  section active
-                    if ($(this).hasClass('switch-trigger')) {
-                        if (event.stopPropagation) {
+                                                    // Alex if we click on switch, stop propagation of the event, so the dropdown will not be hide, otherwise we set the  section active
+                                                    if ($(this).hasClass('switch-trigger')) {
+                                                        if (event.stopPropagation) {
                             event.stopPropagation();
                         } else if (window.event) {
-                            window.event.cancelBubble = true;
-                        }
-                    }
-                });
+                                                window.event.cancelBubble = true;
+                                            }
+                                            }
+                                        });
 
                 $('.fixed-plugin .active-color span').click(function () {
                     $full_page_background = $('.full-page-background');
@@ -220,31 +199,31 @@
                     $(this).siblings().removeClass('active');
                     $(this).addClass('active');
 
-                    var new_color = $(this).data('color');
+                                            var new_color = $(this).data('color');
 
-                    if ($sidebar.length != 0) {
+                                            if ($sidebar.length != 0) {
                         $sidebar.attr('data-color', new_color);
-                    }
+                                            }
 
-                    if ($full_page.length != 0) {
+                                            if ($full_page.length != 0) {
                         $full_page.attr('filter-color', new_color);
-                    }
+                                            }
 
-                    if ($sidebar_responsive.length != 0) {
+                                            if ($sidebar_responsive.length != 0) {
                         $sidebar_responsive.attr('data-color', new_color);
-                    }
-                });
+                                            }
+                                        });
 
                 $('.fixed-plugin .background-color .badge').click(function () {
                     $(this).siblings().removeClass('active');
                     $(this).addClass('active');
 
-                    var new_color = $(this).data('background-color');
+                                            var new_color = $(this).data('background-color');
 
-                    if ($sidebar.length != 0) {
+                                            if ($sidebar.length != 0) {
                         $sidebar.attr('data-background-color', new_color);
-                    }
-                });
+                                            }
+                                        });
 
                 $('.fixed-plugin .img-holder').click(function () {
                     $full_page_background = $('.full-page-background');
@@ -253,102 +232,102 @@
                     $(this).parent('li').addClass('active');
 
 
-                    var new_image = $(this).find("img").attr('src');
+                                            var new_image = $(this).find("img").attr('src');
 
-                    if ($sidebar_img_container.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
+                                            if ($sidebar_img_container.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
                         $sidebar_img_container.fadeOut('fast', function () {
                             $sidebar_img_container.css('background-image', 'url("' + new_image + '")');
                             $sidebar_img_container.fadeIn('fast');
-                        });
-                    }
+                                                });
+                                            }
 
-                    if ($full_page_background.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
-                        var new_image_full_page = $('.fixed-plugin li.active .img-holder').find('img').data('src');
+                                            if ($full_page_background.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
+                                                var new_image_full_page = $('.fixed-plugin li.active .img-holder').find('img').data('src');
 
                         $full_page_background.fadeOut('fast', function () {
                             $full_page_background.css('background-image', 'url("' + new_image_full_page + '")');
                             $full_page_background.fadeIn('fast');
-                        });
-                    }
+                                                });
+                                            }
 
-                    if ($('.switch-sidebar-image input:checked').length == 0) {
-                        var new_image = $('.fixed-plugin li.active .img-holder').find("img").attr('src');
-                        var new_image_full_page = $('.fixed-plugin li.active .img-holder').find('img').data('src');
+                                            if ($('.switch-sidebar-image input:checked').length == 0) {
+                                                var new_image = $('.fixed-plugin li.active .img-holder').find("img").attr('src');
+                                                var new_image_full_page = $('.fixed-plugin li.active .img-holder').find('img').data('src');
 
                         $sidebar_img_container.css('background-image', 'url("' + new_image + '")');
                         $full_page_background.css('background-image', 'url("' + new_image_full_page + '")');
-                    }
+                                            }
 
-                    if ($sidebar_responsive.length != 0) {
+                                            if ($sidebar_responsive.length != 0) {
                         $sidebar_responsive.css('background-image', 'url("' + new_image + '")');
-                    }
-                });
+                                            }
+                                        });
 
                 $('.switch-sidebar-image input').change(function () {
                     $full_page_background = $('.full-page-background');
 
                     $input = $(this);
 
-                    if ($input.is(':checked')) {
-                        if ($sidebar_img_container.length != 0) {
+                                            if ($input.is(':checked')) {
+                                                if ($sidebar_img_container.length != 0) {
                             $sidebar_img_container.fadeIn('fast');
                             $sidebar.attr('data-image', '#');
-                        }
+                                                }
 
-                        if ($full_page_background.length != 0) {
+                                                if ($full_page_background.length != 0) {
                             $full_page_background.fadeIn('fast');
                             $full_page.attr('data-image', '#');
-                        }
+                                                }
 
-                        background_image = true;
-                    } else {
-                        if ($sidebar_img_container.length != 0) {
+                                                background_image = true;
+                                            } else {
+                                                if ($sidebar_img_container.length != 0) {
                             $sidebar.removeAttr('data-image');
                             $sidebar_img_container.fadeOut('fast');
-                        }
+                                                }
 
-                        if ($full_page_background.length != 0) {
+                                                if ($full_page_background.length != 0) {
                             $full_page.removeAttr('data-image', '#');
                             $full_page_background.fadeOut('fast');
-                        }
+                                                }
 
-                        background_image = false;
-                    }
-                });
+                                                background_image = false;
+                                            }
+                                        });
 
                 $('.switch-sidebar-mini input').change(function () {
                     $body = $('body');
 
                     $input = $(this);
 
-                    if (md.misc.sidebar_mini_active == true) {
+                                            if (md.misc.sidebar_mini_active == true) {
                         $('body').removeClass('sidebar-mini');
-                        md.misc.sidebar_mini_active = false;
+                                                md.misc.sidebar_mini_active = false;
 
                         $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar();
 
-                    } else {
+                                            } else {
 
                         $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar('destroy');
 
-                        setTimeout(function () {
+                                                setTimeout(function () {
                             $('body').addClass('sidebar-mini');
 
-                            md.misc.sidebar_mini_active = true;
-                        }, 300);
-                    }
+                                                    md.misc.sidebar_mini_active = true;
+                                                }, 300);
+                                            }
 
-                    // we simulate the window Resize so the charts will get updated in realtime.
-                    var simulateWindowResize = setInterval(function () {
-                        window.dispatchEvent(new Event('resize'));
-                    }, 180);
+                                            // we simulate the window Resize so the charts will get updated in realtime.
+                                            var simulateWindowResize = setInterval(function () {
+                                                window.dispatchEvent(new Event('resize'));
+                                            }, 180);
 
-                    // we stop the simulation of Window Resize after the animations are completed
-                    setTimeout(function () {
-                        clearInterval(simulateWindowResize);
-                    }, 1000);
+                                            // we stop the simulation of Window Resize after the animations are completed
+                                            setTimeout(function () {
+                                                clearInterval(simulateWindowResize);
+                                            }, 1000);
 
-                });
+                                        });
             });
         });
     </script>

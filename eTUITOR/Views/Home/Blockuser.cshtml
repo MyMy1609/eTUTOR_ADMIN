@@ -1,11 +1,13 @@
-﻿@model eTUITOR.Models.tutor
-@using eTUITOR.Models;
+﻿@using eTUITOR.Models;
+
 
 @{
-    ViewBag.Title = "Course Management";
+    ViewBag.Title = "Blockuser";
     Layout = "~/Views/Shared/_Layout.cshtml";
     eTUTOREntities db = new eTUTOREntities();
-    var sessionlist = ViewData["sessionlist"] as List<eTUITOR.Models.session>;
+    var tutor = db.tutors.ToList(); //used in line 91-foreach
+    var parent = db.parents.ToList(); //used in line 159-foreach
+    var student = db.students.ToList(); //used in line 226-foreach
 }
 
 <!DOCTYPE html>
@@ -15,9 +17,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Course Management</title>
+    <title>User Management</title>
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
-    @section css {
+
     <link href="~/Content/build/css/font-awesome.min.css" rel="stylesheet" />
     <!-- CSS Files -->
     <link href="~/Content/build/css/material-dashboard.css" rel="stylesheet" />
@@ -27,7 +29,6 @@
     <link href="~/Content/build/css/switch.css" rel="stylesheet" />
     <link href="~/Content/vendor/lightbox2/dist/css/lightbox.min.css" rel="stylesheet" />
     <link href="~/Content/build/css/TutorHomePage.component.css" rel="stylesheet" />
-        }
     <script>
         (function (w, d, s, l, i) {
             w[l] = w[l] || [];
@@ -68,7 +69,7 @@
                             <div class="card-icon">
                                 <i class="material-icons">assignment</i>
                             </div>
-                            <h4 class="card-title">Danh sách buổi học</h4>
+                            <h4 class="card-title">Danh sách tài khoản tutor</h4>
                         </div>
                         <div class="card-body">
                             <div class="toolbar">
@@ -79,47 +80,40 @@
                                        cellspacing="0" width="100%" style="width:100%">
                                     <thead>
                                         <tr>
-                                            @*<th style="width: 50px;">ID</th>*@
-                                            <th>TÊN GIA SƯ</th>
-                                            <th>THỨ</th>
-                                            <th>THỜI GIAN</th>
-                                            <th>HỌC SINH</th>
-                                            <th>MÔN HỌC</th>
-                                            @*<th style="width: 60px">LỚP</th>*@
-                                            @*<th>BUỔI ĐANG HỌC</th>
-                                            <th>BUỔI ĐÃ HỌC</th>*@
+                                            <th>HỌ VÀ TÊN</th>
+                                            <th>EMAIL</th>
+                                            <th>SĐT</th>
                                             <th>TRẠNG THÁI</th>
-                                            <th>DUYỆT</th>
-
+                                            <th>XEM CHI TIẾT</th>
+                                            <th>KHÓA TÀI KHOẢN</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach (var session in sessionlist)
+                                        @foreach (var item in tutor.Where(x => x.status == 1 || x.status ==3))
                                         {
-                                        <tr>
-                                            @*<td>1</td>*@
-                                            <td>@session.tutor.fullname</td>
-                                            <td>@session.day_otw</td>
-                                            <td>@session.start_time - @session.end_time</td>
-                                            <td>@session.student.fullname</td>
-                                            <td>@session.tutor.specialized</td>
-                                            <td>@session.status1.name</td>
-                                            @*<td>30</td>
-        <td>2</td>*@
-                                            @*<td><input  type="checkbox" class="checkbox-switch" name="check" id="slider-duyet" onchange="duyetstudent(@session.session_id)"></td>*@
-                                            <td>
-
-                                                <label class="switch">
-                                                    <input type="checkbox" name="check" id="slider-duyet" onchange="duyetkhoahoc(@session.session_id)">
-                                                    <span class="slider round"></span>
-                                                </label>
-                                            </td>
 
 
+                                            <tr>
+                                                <td>@item.fullname</td>
+                                                <td>@item.email</td>
+                                                <td>@item.phone</td>
+                                                <td>@item.status1.name</td>
+                                                <td>
+                                                    <a href="@Url.Action("detailstudent", "Home")">
+                                                        <i class="material-icons">
+                                                            remove_red_eye
+                                                        </i>
+                                                    </a>
 
-                                        </tr>
+                                                </td>
+                                                <td>
+                                                    <label class="switch">
+                                                        <input type="checkbox" name="check" id="slider-khoa" onchange="khoatutor(@item.tutor_id)">
+                                                        <span class="slider round"></span>
+                                                    </label>
+                                                </td>
+                                            </tr>
                                         }
-
                                     </tbody>
                                 </table>
                             </div>
@@ -131,6 +125,252 @@
                 <!-- end col-md-12 -->
             </div>
             <!-- end row -->
+        </div>
+    </div>
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header card-header-primary card-header-icon">
+                            <div class="card-icon">
+                                <i class="material-icons">assignment</i>
+                            </div>
+                            <h4 class="card-title">Danh sách tài khoản parent</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="toolbar">
+                                <!--        Here you can write extra buttons/actions for the toolbar              -->
+                            </div>
+                            <div class="material-datatables">
+                                <table id="datatables1" class="table table-striped table-no-bordered table-hover"
+                                       cellspacing="0" width="100%" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>HỌ VÀ TÊN</th>
+                                            <th>EMAIL</th>
+                                            <th>SĐT</th>
+                                            <th>TRẠNG THÁI</th>
+                                            <th>XEM CHI TIẾT</th>
+                                            <th>KHÓA TÀI KHOẢN</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in parent.Where(x => x.status == 1 || x.status == 3))
+                                        {
+
+
+                                            <tr>
+                                                <td>@item.fullname</td>
+                                                <td>@item.email</td>
+                                                <td>@item.phone</td>
+                                                <td>@item.status1.name</td>
+                                                <td>
+                                                    <a href="@Url.Action("detailstudent","Home")">
+                                                        <i class="material-icons">
+                                                            remove_red_eye
+                                                        </i>
+                                                    </a>
+
+                                                </td>
+                                                <td>
+                                                    <label class="switch">
+                                                        <input type="checkbox" name="check" onchange="khoaparent(@item.parent_id)">
+                                                        <span class="slider round"></span>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- end content-->
+                    </div>
+                    <!--  end card  -->
+                </div>
+                <!-- end col-md-12 -->
+            </div>
+            <!-- end row -->
+        </div>
+    </div>
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header card-header-primary card-header-icon">
+                            <div class="card-icon">
+                                <i class="material-icons">assignment</i>
+                            </div>
+                            <h4 class="card-title">Danh sách tài khoản student</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="toolbar">
+                                <!--        Here you can write extra buttons/actions for the toolbar              -->
+                            </div>
+                            <div class="material-datatables">
+                                <table id="datatables2" class="table table-striped table-no-bordered table-hover"
+                                       cellspacing="0" width="100%" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>HỌ VÀ TÊN</th>
+                                            <th>EMAIL</th>
+                                            <th>SĐT</th>
+                                            <th>TRẠNG THÁI</th>
+                                            <th>XEM CHI TIẾT</th>
+                                            <th>KHÓA TÀI KHOẢN</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in student.Where(x => x.status == 1 || x.status == 3))
+                                        {
+
+
+                                            <tr>
+                                                <td>@item.fullname</td>
+                                                <td>@item.email</td>
+                                                <td>
+                                                    @item.phone
+                                                </td>
+                                                <td>@item.status</td>
+                                                <td>
+                                                    <a href="@Url.Action("detailstudent","Home")">
+                                                        <i class="material-icons">
+                                                            remove_red_eye
+                                                        </i>
+                                                    </a>
+
+                                                </td>
+                                                <td>
+                                                    <label class="switch">
+                                                        <input type="checkbox" name="check" onchange="khoastudent(@item.student_id)">
+                                                        <span class="slider round"></span>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- end content-->
+                    </div>
+                    <!--  end card  -->
+                </div>
+                <!-- end col-md-12 -->
+            </div>
+            <!-- end row -->
+        </div>
+    </div>
+    <div class="fixed-plugin">
+        <div class="dropdown show-dropdown">
+            <a href="#" data-toggle="dropdown">
+                <i class="fa fa-cog fa-2x"> </i>
+            </a>
+            <ul class="dropdown-menu">
+                <li class="header-title"> Sidebar Filters</li>
+                <li class="adjustments-line">
+                    <a href="javascript:void(0)" class="switch-trigger active-color">
+                        <div class="badge-colors ml-auto mr-auto">
+                            <span class="badge filter badge-purple" data-color="purple"></span>
+                            <span class="badge filter badge-azure" data-color="azure"></span>
+                            <span class="badge filter badge-green" data-color="green"></span>
+                            <span class="badge filter badge-warning" data-color="orange"></span>
+                            <span class="badge filter badge-danger" data-color="danger"></span>
+                            <span class="badge filter badge-rose active" data-color="rose"></span>
+                        </div>
+                        <div class="clearfix"></div>
+                    </a>
+                </li>
+                <li class="header-title">Sidebar Background</li>
+                <li class="adjustments-line">
+                    <a href="javascript:void(0)" class="switch-trigger background-color">
+                        <div class="ml-auto mr-auto">
+                            <span class="badge filter badge-black active" data-background-color="black"></span>
+                            <span class="badge filter badge-white" data-background-color="white"></span>
+                            <span class="badge filter badge-red" data-background-color="red"></span>
+                        </div>
+                        <div class="clearfix"></div>
+                    </a>
+                </li>
+                <li class="adjustments-line">
+                    <a href="javascript:void(0)" class="switch-trigger">
+                        <p>Sidebar Mini</p>
+                        <label class="ml-auto">
+                            <div class="togglebutton switch-sidebar-mini">
+                                <label>
+                                    <input type="checkbox">
+                                    <span class="toggle"></span>
+                                </label>
+                            </div>
+                        </label>
+                        <div class="clearfix"></div>
+                    </a>
+                </li>
+                <li class="adjustments-line">
+                    <a href="javascript:void(0)" class="switch-trigger">
+                        <p>Sidebar Images</p>
+                        <label class="switch-mini ml-auto">
+                            <div class="togglebutton switch-sidebar-image">
+                                <label>
+                                    <input type="checkbox" checked="">
+                                    <span class="toggle"></span>
+                                </label>
+                            </div>
+                        </label>
+                        <div class="clearfix"></div>
+                    </a>
+                </li>
+                <li class="header-title">Images</li>
+                <li class="active">
+                    <a class="img-holder switch-trigger" href="javascript:void(0)">
+                        <img src="~/Content/build/img/sidebar-1.jpg" />
+                    </a>
+                </li>
+                <li>
+                    <a class="img-holder switch-trigger" href="javascript:void(0)">
+                        <img src="~/Content/build/img/sidebar-2.jpg" />
+                    </a>
+                </li>
+                <li>
+                    <a class="img-holder switch-trigger" href="javascript:void(0)">
+                        <img src="~/Content/build/img/sidebar-3.jpg" />
+                    </a>
+                </li>
+                <li>
+                    <a class="img-holder switch-trigger" href="javascript:void(0)">
+                        <img src="~/Content/build/img/sidebar-4.jpg" />
+                    </a>
+                </li>
+                <li class="button-container">
+                    <a href="https://www.creative-tim.com/product/material-dashboard-pro" target="_blank" class="btn btn-rose btn-block btn-fill">
+                        Buy
+                        Now
+                    </a>
+                    <a href="https://demos.creative-tim.com/material-dashboard-pro/docs/2.1/getting-started/introduction.html"
+                       target="_blank" class="btn btn-default btn-block">
+                        Documentation
+                    </a>
+                    <a href="https://www.creative-tim.com/product/material-dashboard" target="_blank" class="btn btn-info btn-block">
+                        Get Free Demo!
+                    </a>
+                </li>
+                <li class="button-container github-star">
+                    <a class="github-button" href="https://github.com/creativetimofficial/ct-material-dashboard-pro"
+                       data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star ntkme/github-buttons on GitHub">Star</a>
+                </li>
+                <li class="header-title">Thank you for 95 shares!</li>
+                <li class="button-container text-center">
+                    <button id="twitter" class="btn btn-round btn-twitter"><i class="fa fa-twitter"></i> &middot; 45</button>
+                    <button id="facebook" class="btn btn-round btn-facebook">
+                        <i class="fa fa-facebook-f"></i> &middot;
+                        50
+                    </button>
+                    <br>
+                    <br>
+                </li>
+            </ul>
         </div>
     </div>
     <!--   Core JS Files   -->
@@ -469,11 +709,59 @@
                     searchPlaceholder: "Search records",
                 }
             });
+            //datatables1
+
+            $('#datatables1').DataTable({
+                "pagingType": "full_numbers",
+                "lengthMenu": [
+                    [10, 25, 50, -1],
+                    [10, 25, 50, "All"]
+                ],
+                responsive: true,
+                language: {
+                    search: "_INPUT_",
+                    searchPlaceholder: "Search records",
+                }
+
+            });
+
+            //datatables2
+
+            $('#datatables2').DataTable({
+                "pagingType": "full_numbers",
+                "lengthMenu": [
+                    [10, 25, 50, -1],
+                    [10, 25, 50, "All"]
+                ],
+                responsive: true,
+                language: {
+                    search: "_INPUT_",
+                    searchPlaceholder: "Search records",
+                }
+
+            });
 
             var table = $('#datatable').DataTable();
-
+            //datatables1
+            var table1 = $('#datatable1').DataTable();
+            //datatables2
+            var table2 = $('#datatable2').DataTable();
             // Edit record
             table.on('click', '.edit', function () {
+                $tr = $(this).closest('tr');
+                var data = table.row($tr).data();
+                alert('You press on Row: ' + data[0] + ' ' + data[1] + ' ' + data[2] + '\'s row.');
+            });
+
+            // Edit record 1
+            table1.on('click', '.edit', function () {
+                $tr = $(this).closest('tr');
+                var data = table.row($tr).data();
+                alert('You press on Row: ' + data[0] + ' ' + data[1] + ' ' + data[2] + '\'s row.');
+            });
+
+            // Edit record 2
+            table2.on('click', '.edit', function () {
                 $tr = $(this).closest('tr');
                 var data = table.row($tr).data();
                 alert('You press on Row: ' + data[0] + ' ' + data[1] + ' ' + data[2] + '\'s row.');
@@ -486,10 +774,35 @@
                 e.preventDefault();
             });
 
+            // Delete a record 1
+            table1.on('click', '.remove', function (e) {
+                $tr = $(this).closest('tr');
+                table1.row($tr).remove().draw();
+                e.preventDefault();
+            });
+
+            // Delete a record 2
+            table2.on('click', '.remove', function (e) {
+                $tr = $(this).closest('tr');
+                table2.row($tr).remove().draw();
+                e.preventDefault();
+            });
+
             //Like record
             table.on('click', '.like', function () {
                 alert('You clicked on Like button');
             });
+
+            //Like record 1
+            table1.on('click', '.like', function () {
+                alert('You clicked on Like button');
+            });
+
+            //Like record 2
+            table2.on('click', '.like', function () {
+                alert('You clicked on Like button');
+            });
+
             let el = $('.checkbox-switch');
             let switchArr = [];
             el.each(function (index, e) {
@@ -502,8 +815,13 @@
                     offText: 'D'
                 });
             })
+
+
         });
     </script>
 </body>
 
 </html>
+
+
+

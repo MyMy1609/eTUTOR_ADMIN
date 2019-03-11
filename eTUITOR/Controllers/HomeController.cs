@@ -144,9 +144,10 @@ namespace eTUITOR.Controllers
         }
         public ActionResult User()
         {
-            ViewBag.Message = "User.";
             return View();
         }
+
+
 
         [HttpPost]
         public ActionResult Duyetkhoahoc(int id)
@@ -156,6 +157,103 @@ namespace eTUITOR.Controllers
             se.status_admin = 1;
             model.SaveChanges();
             return RedirectToAction("Duyetkhoahoc");
+        }
+
+        public ActionResult Contact()
+        {
+            var contact = model.contact_admin.ToList();
+            return View(contact);
+        }
+
+        public ActionResult Blockuser()
+        {
+            
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Duyettutor(int id)
+        {
+            int asd = id;
+            var se = model.tutors.Find(id);
+            se.status = 1;
+            model.SaveChanges();
+            return RedirectToAction("Duyettutor");
+        }
+
+        [HttpPost]
+        public ActionResult Duyetparent(int id)
+        {
+            int asd = id;
+            var se = model.parents.Find(id);
+            se.status = 1;
+            model.SaveChanges();
+            return RedirectToAction("Duyetparent");
+        }
+
+        [HttpPost]
+        public ActionResult Duyetstudent(int id)
+        {
+            int asd = id;
+            var se = model.students.Find(id);
+            se.status = 1;
+            model.SaveChanges();
+            return RedirectToAction("Duyetstudent");
+        }
+
+        //khoa
+        [HttpPost]
+        public ActionResult Khoatutor(int id)
+        {
+            int asd = id;
+            var se = model.tutors.Find(id);
+            if (se.status ==1)
+            {
+                se.status = 3;
+                model.SaveChanges();
+            }
+            else if (se.status ==3)
+            {
+                se.status = 1;
+                model.SaveChanges();
+            }                     
+            return RedirectToAction("Khoatutor");
+        }
+
+        [HttpPost]
+        public ActionResult Khoaparent(int id)
+        {
+            int asd = id;
+            var se = model.parents.Find(id);
+            if (se.status == 1)
+            {
+                se.status = 3;
+                model.SaveChanges();
+            }
+            else if (se.status == 3)
+            {
+                se.status = 1;
+                model.SaveChanges();
+            }
+            return RedirectToAction("Khoaparent");
+        }
+
+        [HttpPost]
+        public ActionResult Khoastudent(int id)
+        {
+            int asd = id;
+            var se = model.students.Find(id);
+            if (se.status == 1)
+            {
+                se.status = 3;
+                model.SaveChanges();
+            }
+            else if (se.status == 3)
+            {
+                se.status = 1;
+                model.SaveChanges();
+            }
+            return RedirectToAction("Khoastudent");
         }
     }
 }
